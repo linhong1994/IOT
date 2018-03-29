@@ -1,0 +1,47 @@
+.pagination div  a {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #337ab7;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  }
+.pagination div  a {
+  background: #fafafa;
+  color: #666;
+}
+.pagination div  a,.pagination div  a {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.pagination div i{
+	float: left;
+	font-family: "微软雅黑";
+	padding: 6px 12px;
+}
+.pagination div  a,.pagination div  span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination div {
+    display: inline;
+}
+.pagination-sm div  a, .pagination-sm div span {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.pagination-sm div span {
+    background-color:gainsboro;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="{:ADDON_PUBLIC}/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			$(function(){
+				
+				wx.config({
+				    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				    appId: "{$appId}", // 必填，公众号的唯一标识
+				    timestamp: {$timestamp}, // 必填，生成签名的时间戳
+				    nonceStr: "{$nonceStr}", // 必填，生成签名的随机串
+				    signature: "{$signature}",// 必填，签名，见附录1
+				    jsApiList: ['chooseWXPay','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				});
+				
+				$("#pay").on("click",function(){
+					jsApiCall();
+				});
+			});
+			
+			//调用微信JS api 支付
+			function jsApiCall()
+			{
+				WeixinJSBridge.invoke(
+					'getBrandWCPayRequest',
+					{$jsApiParameters},
+					function(res){
+						WeixinJSBridge.log(res.err_msg);//注释掉if  因为微信支付不能用
+						//if(res.err_msg=="get_brand_wcpay_request:ok"){
+						var msg=layer.msg('缴费信息正在更新，请勿关闭！', {icon: 16,time:99999999});
+						$.ajax({
+							type:"post",
+							url:"{:addons_url('Village://Index/updatafee')}",
+							async:true,
+							success:function(data){
+								layer.close(msg);
+								if(data=="success"){
+									layer.msg('信息已更新！');
+								}
+								location.reload();
+							}
+						});
+//							location.href="location: {addons_url('Village://Index/updatafee')}" ;
+						//}
+					}
+				);
+			}
+		</script>
+		<style type="text/css">
+			.weui_btn_primary{
+				background: #e42012;
+				width: 50%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">物业费查询</h1>
+		</div>
+		<div class="content">
+			<table class="table table-bordered">
+					<tr>
+						<td colspan="4" style="text-align: center;">物业费信息</td>
+					</tr>
+					<tr>
+				  		<td style="text-align: center;">月份</td>
+				  		<td style="text-align: center;">费用</td>
+				  		<td style="text-align: center;">状态</td>
+				  		<td style="text-align: center;">操作</td>
+				  	</tr>
+				<foreach name="feelog" item="item">
+
+				  	<tr>
+				  		<td>{$item.feedate}</td>
+				  		<td>{$item.fee}</td>
+				  		<td>
+				  			<if condition="$item['paystate'] eq 0 ">
+				  				未支付
+							<else /> 
+								已支付
+							</if>
+				  		</td>
+				  		<td><a style="color: deepskyblue;" href="{:U('villagefeedetail',array('feeid'=>$item['id']))}">详情</a></td>
+				  	</tr>
+				</foreach>
+			
+			</table>
+			<div>
+				
+			</div>
+			<if condition="$feecount neq 0">
+				<a href="#" class="weui_btn weui_btn_primary" id="pay">支付</a>
+			</if>
+		</div>
+	</body>
+</html>

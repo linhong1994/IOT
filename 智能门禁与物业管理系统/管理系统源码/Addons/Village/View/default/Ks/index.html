@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+		<style type="text/css">
+			.weui_btn_primary{
+				background: #e42012;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">门禁Q钥匙</h1>
+		</div>
+		<div class="content">
+						<!--
+            	作者：15305031018@163.com
+            	时间：2016-05-04
+            	描述：轮播
+            -->
+			<div class="swiper-container swiper-container1" style="position: relative;">
+			  <div class="swiper-wrapper">
+					<foreach name="adlist" item="data" >
+					    <div class="swiper-slide">
+					    	<a href="{:addons_url('Village://Index/advertisementDetail',array('adid'=>$data['id']))}">
+					    		<img class="lunboimg"  src="{$data.adimage}"/>
+					    	</a>
+					    </div>
+					</foreach>
+			  </div>
+			   <div class="swiper-pagination pager1" ></div>
+			</div>
+
+
+
+		<br>
+		<if condition="($userinfo.type eq 0)">
+		<div class="row">
+			<div class="col-md-12 col-lg-6">
+	            <div class="box">
+		            <div class="box-header with-border">
+		              <h3 class="box-title">
+					  门禁信息
+			          <a style="float: right;" type="submit" class="btn btn-success" href="{:U('lockpay')}">开通/续费</a>
+					</h3>
+		            </div>
+
+		            <div class="box-body">
+		            	<style>
+		            		.tabletitle{
+		            			font-weight: bold;
+		            		}
+		            	</style>
+		                <table class="table table-bordered">
+							<tbody><tr>
+								<td class="tabletitle">开通状态</td>
+								<td>
+									<switch name="userinfo.lock">    
+			                    		<case value="0"><font color="red">未开通或到期</font></case>    
+			                    		<case value="1"><font color="green">已开通</font></case>    
+			                    		<default /><font color="red">未开通或到期</font>
+			                    	</switch>
+								</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">开通时间</td>
+								<td>{$userinfo.lstime}</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">到期时间</td>
+								<td>{$userinfo.letime}</td>
+
+							</tr>
+		                </tbody></table>
+		            </div>
+
+		        </div>
+	        </div>
+     	</div> 
+		</if>
+
+
+		<if condition="($userinfo.lock eq 1)">
+		<volist name="locklist" id="vo">
+		<button class="weui_btn weui_btn_primary"  value="{$vo.id}" data-id="{$vo.id}" style="font-size:20px;width: 70%;position: relative;" onclick="ks(this.value)">{$vo.door}</button>
+		<!--	<p style="text-align: center;"><form   >
+				<input type="hidden" name="lockid" value="{$vo.id}" />
+				<input  class="weui_btn weui_btn_primary" type="submit" value="{$vo.door}" style="font-size:20px;width: 50%;"/>
+			</form></p>-->
+		</volist>
+		</if>
+			
+		</div>
+		<script type="text/javascript">
+			function ks(val){
+				$("button").attr('disabled',"true");
+				$.ajax({
+					data:{data:val},
+					url:"{:addons_url('Village://Ks/ks')}",
+					async:true,
+					success:function(data){
+						if(data.success == 1){
+							alert(data.msg);
+						}else{
+							alert(data.msg);
+						}
+						$("button").removeAttr("disabled"); 
+					},
+					error:function(data){
+						alert(data.msg);
+						$("button").removeAttr("disabled"); 
+					}
+				});
+			};
+			
+			//var i=0;
+			//$("butto").click(function(){
+			//	$('#loadingToast').css('display','block');
+			//	var data="old";
+			//	$("button").attr('disabled',"true");
+			//	$("#result").html("请求"+(++i)+"发送中...<br>");
+			//	$.ajax({
+			//		type:"get",
+			//		data:"data="+data,
+			//		url:"{:addons_url("Village://Ks/ks")}",
+			//		async:true,
+			//		success:function(data){
+			//			$("#result").append("服务器已响应<br>正在处理响应数据...<br>");
+			//			if(data=="success"){
+			//				$("#result").append("<span style='color:blue'>开锁成功！</span><br>");
+			//			}else{
+			//				$("#result").append("<span style='color:red'>开锁失败！</span><br>");
+			//			}
+			//			$("button").removeAttr("disabled"); 
+			//			$('#loadingToast').css('display','none');
+			//		},
+			//		error:function(data){
+			//			$("#result").append("服务器已响应<br>正在处理响应数据...<br>");
+			//			$("#result").append("<span style='color:red'>开锁失败</span><br>");
+			//			$("button").removeAttr("disabled"); 
+			//			$('#loadingToast').css('display','none');
+			//		}
+			//	});
+			//	$("#result").append("请求发送完毕<br>等待服响应...<br>");
+			//});
+		var mySwiper1 = new Swiper('.swiper-container1', {
+				pagination : '.pager1',
+				paginationClickable :true,
+				autoplay: 5000,//可选选项，自动滑动
+				loop : true,
+			});
+		</script>
+	</body>
+</html>

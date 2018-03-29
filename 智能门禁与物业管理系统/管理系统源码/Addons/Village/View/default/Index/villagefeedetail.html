@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">物业费详情</h1>
+		</div>
+		<div class="content">
+			<table class="table table-bordered">
+					<tr>
+						<td colspan="4" style="text-align: center;">物业费信息</td>
+					</tr>
+					<tr>
+				  		<td style="text-align: center;">月份</td>
+				  		<td style="text-align: center;">总费用</td>
+				  		<td style="text-align: center;">状态</td>
+				 	 </tr>
+
+				  	<tr>
+				  		<td>{$feelog.feedate}</td>
+				  		<td>{$feelog.fee}</td>
+				  		<td style="color: red;">
+				  			<if condition="$feelog['paystate'] eq 0 ">
+				  				未支付
+							<else /> 
+								已支付
+							</if>
+				  		</td>
+
+				  	</tr>
+				  	<if condition="$feelog['paystate'] eq 1 ">
+						<tr>
+				  			<td>支付方式</td>
+				  			<td colspan="2" style="color: deepskyblue;">
+					  			<if condition="$feelog['paystate'] eq 0 ">
+					  				在线支付
+					  				<else/>
+					  				线下支付
+					  			</if>
+				  			</td>
+				  		</tr>
+					</if>
+				  	<tr>
+				  		<td colspan="3" style="color: red;text-align: center;font-weight: bold;">费用明细</td>
+				  	</tr>
+				  	<foreach name="feedetail" item="item">
+				  		<tr>
+					  		<td>{$item.feename}</td>
+					  		<td colspan="2">{$item.feevalue}</td>
+				  		</tr>
+				  	</foreach>
+				  
+			
+			</table>
+		
+		</div>
+	</body>
+</html>

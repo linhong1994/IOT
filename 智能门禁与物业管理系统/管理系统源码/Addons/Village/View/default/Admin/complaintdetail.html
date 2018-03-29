@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/select2/select2.min.css">
+<include file="Public/adminheader" /> 
+
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">投诉信息</a></li>
+        <li class="active">投诉详情</li>
+      </ol>
+    </section>
+    <section  class="content invoice">
+	      <div class="row">
+	        <div class="col-xs-12">
+	          <h2 class="page-header">
+	            <i class="fa fa-bookmark-o"></i>投诉名称： {$complaint.title}
+	            <small class="pull-right">投诉时间：{$complaint.adddate}</small>
+	          </h2>
+	        </div>
+	        <!-- /.col -->
+	      </div>
+		<div class="row invoice-info">
+	        <div class="col-sm-4 invoice-col">
+	                         
+	          <address>
+	            <strong>投诉业主</strong><br>
+	            {$userinfo.building}栋-{$userinfo.unit}单元-{$userinfo.room}室
+	            <br>
+	          </address>
+	    	</div>
+    	</div>
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-xs-12">
+          <p class="lead">投诉内容:</p>
+          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+           {$complaint.describe}
+          </div>
+        </div>
+		<form action="{:addons_url("village://Admin/addComplaintNews")}" method="post" accept-charset="utf-8" class="col-xs-12">
+			<input type="hidden" name="uid" value="{$complaint.uid}" id="uid"/>
+			<input type="hidden" name="cid" value="{$complaint.id}" id="cid"/>
+			<input type="hidden" name="source" value="投诉：{$complaint.describe}" id="source"/>
+		  	<label for="news">回复信息:</label><br />
+		  	<textarea name="reply" class="form-control"></textarea><br /><br />
+			<input type="submit" value="回复" class="btn btn-primary"/>
+		</form>
+      </div>
+	
+      
+        
+    </section>
+
+
+
+<include file="Public/adminfooter" />

@@ -1,0 +1,143 @@
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/select2/select2.min.css">
+<include file="Public/adminheader" /> 
+
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">小区管理</a></li>
+        <li class="active">物业列表</li>
+      </ol>
+    </section>
+    <section  class="content">
+		 
+	    	<div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">物业列表</h3>
+
+			  <div class="box-tools" style="right: 200px;">
+			  	<div class="input-group input-group-sm" style="width: 30px;">
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default" data-toggle="modal" data-target="#myModal">添加</button>
+                  </div>
+                </div>
+              </div>
+              <div class="box-tools">
+              	<form action="{:U('adminLists')}" method="post">
+	                <div class="input-group input-group-sm" style="width: 150px;">
+	                  <input type="text" name="searchadmin" class="form-control pull-right" value="{$searchadmin}" placeholder="姓名或小区">
+	
+	                  <div class="input-group-btn">
+	                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+	                  </div>
+	                </div>
+                </form>
+              </div>
+              
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tr>
+                  <th>编号</th>
+                  <th>管理员电话</th>
+                  <th>管理员姓名</th>
+                  <th>小区</th>
+                  <th>上次登录时间</th>
+                  <th>上次登录IP地址</th>
+                  <th>添加时间</th>
+                  <th>操作</th>
+                </tr>
+                <volist name="list" id="data">
+					<tr>
+	                    <td>{$data.id}</td>
+	                    <td>{$data.phone}</td>
+	                    <td>{$data.name}</td>
+	                    <td>{$data.tel}</td>
+	                    <td>{$data.lastlogindate}</td>
+	                    <td>{$data.loginIP}</td>
+	                    <td>{$data.adddate}</td>
+	                    <td><a href="javascript:void(0)" onclick="if(confirm('确认删除吗？')){location.href='{:U('removeAdmin',array('adminid'=>$data['id']))}'}">删除</a></td>
+	                </tr>
+				</volist>
+
+              </table>
+            </div>
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                {$page}
+              </ul>
+            </div>
+             
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+      
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">添加物业</h4>
+		      </div>
+		      <div class="modal-body">
+					<form action="{:U('addAdmin')}" method="post" class="form-horizontal">
+						<input type="hidden" name="grade" value="0"/>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">小区</label>
+			           		<div class="col-sm-10">
+				                <select name="vid" class="form-control select2" style="width: 100%;" data-placeholder="请选择小区">
+				                	<volist name="villagelist" id="item">
+										<option value="{$item.id}">{$item.name}</option>
+									</volist>
+				                </select>
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">姓名</label>
+			           		<div class="col-sm-10">
+				                <input type="text" class="form-control" name="name" placeholder="姓名" required="required"/>
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">手机号码</label>
+			           		<div class="col-sm-10">
+				                <input type="tel" class="form-control" name="phone" placeholder="手机号码" required="required"/>
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">密码</label>
+			           		<div class="col-sm-10">
+				               	<input type="password" class="form-control" name="password" placeholder="密码" required="required"/>
+			                </div>
+			            </div>
+			            <div class="box-footer">
+			            	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			                <button type="submit"  class="btn btn-primary pull-right">添加</button>
+			            </div>
+			        </form>
+		              <!-- /.form-group -->
+		      </div>
+		    </div>
+		  </div>
+		</div>
+    </section>
+
+
+
+<include file="Public/adminfooter" />
+<script src="{:ADDON_PUBLIC}/plugins/select2/select2.full.min.js"></script>
+
+<script>
+	window.onload=function(){
+		$.fn.modal.Constructor.prototype.enforceFocus = function () { };
+		$(".select2").select2();
+	}
+</script>

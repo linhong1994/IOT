@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+		<style type="text/css">
+			.weui_btn_primary{
+				background: #e42012;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">投诉服务</h1>
+		</div>
+		<div class="content">
+			<form action="{:addons_url("village://Index/Complaint")}" method="post">
+				<div class="list">
+					<div class="item item-divider" style="text-align: center;">请输入您的投诉事项</div>
+					<textarea name="describe" style="width: 98%;margin: 1%;border: 1px solid #C0C0C0 ;height: 300px;" required="required"></textarea>
+				</div>
+				<button type="submit" class="weui_btn weui_btn_primary" style="width: 50%;">提交投诉</button>
+			</form>
+		</div>
+	</body>
+</html>

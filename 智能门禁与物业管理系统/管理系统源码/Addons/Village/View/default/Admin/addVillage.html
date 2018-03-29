@@ -1,0 +1,135 @@
+<include file="Public/adminheader" /> 
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">小区管理</a></li>
+        <li class="active">小区添加</li>
+      </ol>
+    </section>
+    <section  class="content">
+		 <div class="row">
+		    <div class="col-md-6">
+		        <div class="box box-primary">
+		            <div class="box-header with-border">
+		              <h3 class="box-title">添加小区</h3>
+		            </div>
+		            <!-- /.box-header -->
+		            <!-- form start -->
+                     <form class="form-horizontal" action="{:U('addVillage')}" method="post" enctype="multipart/form-data">
+		              <div class="box-body">
+		                <div class="form-group">
+		                  <label for="name" class="col-sm-2 control-label">小区名称</label>
+		
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="name" name="name" placeholder="小区名称" required="required">
+		                  </div>
+		                </div>
+		                <div class="form-group">
+		                  <label for="address" class="col-sm-2 control-label">小区地址</label>
+		
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="address" name="address" placeholder="小区地址" required="required">
+		                  </div>
+		                </div>
+						<div class="form-group">
+		                  <label for="tel" class="col-sm-2 control-label">物业电话</label>
+		
+		                  <div class="col-sm-10">
+		                    <input type="tel" class="form-control" id="tel" name="tel" placeholder="物业电话" required="required">
+		                  </div>
+		                </div>
+		                <div class="form-group">
+		                  <label for="property" class="col-sm-2 control-label">开发商</label>
+		
+		                  <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="property" name="property" placeholder="开发商" required="required">
+		                  </div>
+		                </div>
+		                <div class="form-group">
+		                  <label for="exampleInputFile" class="col-sm-2 control-label">小区图片</label>
+		                  <div class="col-sm-10">
+		                    <input type="file" class=""  name="image" accept="image/*" required="required">
+		                  </div>
+		                </div>
+		                <div class="form-group">
+		                  <label for="inputPassword3" class="col-sm-2 control-label">经纬度</label>
+		
+		                  <div class="col-sm-5">
+		                    <input type="text" class="form-control" id="longitude" name="longitude" readonly="readonly" placeholder="点击地图获取" required="required">
+		                  </div>
+		                  <div class="col-sm-5">
+		                    <input type="text" class="form-control" id="latitude" name="latitude" readonly="readonly" placeholder="点击地图获取" required="required">
+		                  </div>
+		                </div>
+				        <div class="form-group">
+		                  <label class="col-sm-2 control-label">介绍</label>
+		                   <div class="col-sm-10">
+		              		   <textarea class="form-control" rows="3" name="introduction" placeholder="介绍"></textarea>
+		                   </div>
+		                </div>
+		              </div>
+		              <!-- /.box-body -->
+		              <div class="box-footer">
+		                <button type="submit" class="btn btn-info pull-right">添加</button>
+		              </div>
+		              <!-- /.box-footer -->
+		            </form>
+		        </div>
+		    </div>
+		    <style>
+		    #container {
+				width: 100%;
+				height: 500px;
+			}
+		    </style>
+		    <div class="col-md-6">
+		        <div class="box box-primary">
+		            <div class="box-header with-border">
+		              <h3 class="box-title">地图</h3>
+		            </div>
+		            <div  id='container'></div>
+					<div id="tip"></div>
+					<div id="panel" style="display: none;"></div>
+		       </div>
+		    </div>
+		</div>
+	    	
+    </section>
+
+
+
+<include file="Public/adminfooter" /> 
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=cc1c2ac35d51aa44133e404c95100e54&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder,AMap.Driving"></script>
+<script>
+	var marker, map = new AMap.Map('container', {
+        resizeEnable: true,
+        zoom:13,
+    });
+    //地图中添加地图操作ToolBar插件
+    map.plugin(['AMap.ToolBar'], function() {
+        //设置地位标记为自定义标记
+        var toolBar = new AMap.ToolBar();
+        map.addControl(toolBar);
+    });
+    map.on('click', function(e) {
+       // alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图！');
+        addMarker(e.lnglat.getLng(),e.lnglat.getLat());
+        $("input[name='longitude']")[0].value=e.lnglat.getLng();
+        $("input[name='latitude']")[0].value=e.lnglat.getLat();
+    });
+	function addMarker(x,y) {
+	    if (marker) {
+	        marker.setMap(null);
+            marker = null;
+	    }
+	    marker = new AMap.Marker({
+	        icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+	        position: [x, y]
+	    });
+	    marker.setMap(map);
+	}
+</script>

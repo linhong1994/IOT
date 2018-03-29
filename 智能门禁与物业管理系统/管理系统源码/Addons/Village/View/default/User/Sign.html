@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+		<style type="text/css">
+			.weui_btn_primary{
+				background: #e42012;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bar bar-header bar-light" style="background: #e42012 ;color: #fff;">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title" style="color: #fff;">签到</h1>
+		</div>
+		<div class="content">
+			<div class="usersignbg">
+				<p style="text-align: center;font-size: 20px;font-weight: bold;color: white;">
+					<empty name="continuity">
+						您连续签到了0天
+					<else /> 
+						您连续签到了{$continuity}天
+					</empty> 
+				</p>
+				<!--<p style="text-align: center;font-size: 10px;color:#D4D4D4;">连续签到7天可参加抽奖</p>
+				<p style="text-align: center;font-size: 10px;color:#D4D4D4;">1/7</p>
+				<p style="text-align: center;">
+					<button class="weui_btn weui_btn_disabled weui_btn_mini weui_btn_primary" disabled="disabled" onclick="alert('asd')">抽奖</button>
+				</p>-->
+			</div>
+			<form action="{:U('Sign')}" method="post">
+				<input type="hidden" name="type" id="type" value="sign" />
+				<empty name="signed">
+					<button type="submit"  class="weui_btn weui_btn_primary"style="margin-top: 10px;width:50%">签到</button>
+				<else /> 
+					<button type="submit" disabled="disabled" class="weui_btn weui_btn_primary weui_btn_disabled"style="margin-top: 10px;">已签到</button>
+				</empty> 
+			</form>
+			
+			<ul class="list" style="margin-top: 10px;">
+				<li class="item item-divider">签到记录</li>
+				<volist name="signlist" id="item">
+					<li class="item">签到时间:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$item.signdate}</li>
+				</volist>
+			</ul>
+		</div>
+	</body>
+</html>

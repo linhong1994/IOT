@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">宝贝详情</h1>
+		</div>
+		<div class="content">
+			<div class="swiper-container swiper-container1" style="position: relative;">
+			  <div class="swiper-wrapper">
+			  	<volist name="Fleamarket.images" id="item">
+					<div class="swiper-slide"><img class="lunboimg"  src="{$item.imageurl}"/></div>
+				</volist>
+			  </div>
+			   <div class="swiper-pagination rentalimagepager" style="font-size: 15px;background: #EDEDED;border-radius: 5px;width: auto;padding: 0 10px;opacity: 0.5;"></div>
+			</div>
+			<div class="rantaldetailinfo">
+				<p class="rentaldetailtitle">{$Fleamarket.fname}</p>
+				<p class="rentaldetailtime">发布时间 {$Fleamarket.addtime} <span></span></p>
+			</div>
+			<div class="bg"></div>
+			<div class="rantaldetailinfo">
+				<p class="rantaldetailprice">{$Fleamarket.fprice}元</p>
+				<hr />
+				<!--描述：房屋配置信息 -->
+				<h5>宝贝描述:</h5>
+				<div class="rentaldetaildescribe">
+					{$Fleamarket.fdescribe}
+				</div>
+			</div>
+			<div class="rentalOwnerinfo">
+				{$Fleamarket.cname} {$Fleamarket.ctel}
+				<a href="{$Fleamarket.ctel}" class="weui_btn weui_btn_mini weui_btn_primary" style="position: absolute;right: 10px;font-size: 20px;top: 2px;">打电话</a>
+			</div>
+			<div style="height: 50px;"></div>
+		</div>
+		<script>
+			var mySwiper1 = new Swiper('.swiper-container1', {
+				pagination : '.rentalimagepager',
+				paginationType : 'fraction',
+				autoplay: 5000,//可选选项，自动滑动
+				loop : true,
+			});
+		</script>
+	</body>
+</html>

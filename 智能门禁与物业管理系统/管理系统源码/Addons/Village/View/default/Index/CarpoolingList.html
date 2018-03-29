@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">小区拼车</h1>
+			<a href="{:U('CarpoolingAdd')}" class="button button-clear button-positive"><i class="ionic ion-plus-round"></i> 发布</a>
+		</div>
+		<div class="content">
+			<div class="list">
+				<volist name="data" id="item">
+				<div class="item xqpinche">
+					<div class="xqpincheleft">
+						<div class="xqpinchetitle">
+							<p style="color: red;">{$item.beginning}</p>
+							<p style="margin-left: 20px;"><i class="ionic ion-arrow-down-a"></i></p>
+							<p style="color: red">{$item.end}</p>
+						</div>
+						<div class="xqpincheinfo">
+							<p>出发时间:<span style="color: #E6B400;">{$item.Dtime}</span></p>
+							<p>车型:<span>{$item.carType}</span></p>
+							<p>车主:{$item.Owners}</p>
+							<p>联系方式:<a href="tel:{$item.tel}">{$item.tel}</a></p>
+						</div>
+					</div>
+					<div class="xqpincheright">
+						<p style="text-align: center;">
+						<if condition="$item.fee gt 0">
+							{$item.fee}/人
+						<else />
+							<notempty name="name">
+								免费
+							<else /> 
+								面议
+							</notempty>
+						</if>
+						</p>
+						<hr />
+						<p style="text-align: center;">剩余座位<span>{$item.seats}</span>个</p>
+					</div>
+				</div>
+				</volist>
+			</div>
+		</div>
+	</body>
+</html>

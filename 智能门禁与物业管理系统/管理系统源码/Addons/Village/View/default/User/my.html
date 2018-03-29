@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<style>
+			.item-icon-right{
+				padding-right: 0;
+			}
+			.item-icon-right i{
+				float: right;
+				padding-right: 10px;
+			}
+		</style>
+		<div class="bar bar-header bar-assertive">
+			<h1 class="title">个人中心</h1>
+		</div>
+		<div class="content">
+			<div class="geren" style="margin-top: 1px;margin-bottom: 1px;">
+				<div class="left">
+					<div style="margin-top: 15px;margin-left: 20px;float: left;">
+						<i class="ionic ion-android-contacts" style="font-size: 50px;color: white;"></i>
+					</div>
+					<div style="margin-top: 40px;margin-left: 90px;color: white;">
+						{$username}
+					</div>
+				</div>
+			</div>
+			<div class="list">
+				<a href="{:U('CarpollingList')}" class="item item-icon-right">
+					个人信息
+					<i class="ionic ion-chevron-right"></i>
+				</a>
+				<a href="{:U('RentalList')}" class="item item-icon-right">
+					我的房屋
+					<i class="ionic ion-chevron-right"></i>
+				</a>
+				<a href="{:U('CarpollingList')}" class="item item-icon-right">
+					我的拼车
+					<i class="ionic ion-chevron-right"></i>
+				</a>
+				<a href="{:U('FleamarketList')}" class="item item-icon-right">
+					我的市场
+					<i class="ionic ion-chevron-right"></i>
+				</a>
+			</div>
+		</div>
+		
+		<!--
+        	作者：15305031018@163.com
+        	时间：2016-05-05
+        	描述：底部
+        -->
+		<div style="width: 100%;height: 100px;"></div>
+		<div class="tabs tabs-icon-top tabs-background-positive  tabs-color-light " style="position: fixed;bottom: 0;z-index: 999;background: red;">
+			<a href="{:U('index')}" class="tab-item active">
+				<i class="icon ion-ios-home"></i>
+			         首页
+			</a>
+			<a href="{:U('error')}" class="tab-item">
+				<i class="icon ion-compose"></i>
+				互动
+			</a>
+			<a href="{:U('error')}" class="tab-item" >
+				<i class="icon ion-ios-people"></i>
+				优惠券
+				
+			</a>
+			<a href="{:U('error')}" class="tab-item" >
+				<i class="icon ion-ios-people"></i>
+				商城
+				
+			</a>
+			<a href="{:addons_url('Village://User/my')}" class="tab-item">
+				<i class="icon ion-ios-contact"></i>
+				我
+			</a>
+		</div>
+	</body>
+</html>

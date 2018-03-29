@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">生活Q服务</h1>
+		</div>
+		<div class="content">
+			<div class="swiper-container swiper-container1" style="position: relative;">
+			  <div class="swiper-wrapper">
+					<foreach name="adlist" item="data" >
+					    <div class="swiper-slide">
+					    	<a href="{:U('advertisementDetail',array('adid'=>$data['id']))}">
+					    		<img class="lunboimg"  src="{$data.adimage}"/>
+					    	</a>
+					    </div>
+					</foreach>
+			  </div>
+			   <div class="swiper-pagination pager1" ></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-3">
+	    			<a href="{:addons_url("Village://Ks/index")}">
+		    			<div class="gnitem col3">
+		    				<p><img src="{:ADDON_PUBLIC}/img/yaoshi2.png" /></p>
+		    				<p>门禁Q钥匙</p>
+		    			</div>
+	    			</a>
+	    		</div>
+	    		<div class="col-xs-3">
+	    			<a href="{:U('error')}">
+		    			<div class="gnitem col3">
+		    				<p><img src="{:ADDON_PUBLIC}/img/xqgg.png" /></p>
+		    				<p>智能电梯</p>
+		    			</div>
+	    			</a>
+	    		</div>
+	    		<div class="col-xs-3">
+	    			<a href="{:U('CellRepair')}">
+		    			<div class="gnitem col3">
+		    				<p><img src="{:ADDON_PUBLIC}/img/xqbx.png" /></p>
+		    				<p>小区报修</p>
+		    			</div>
+	    			</a>
+	    		</div>
+	    		<div class="col-xs-3">
+	    			<a href="{:U('pmfQuery')}">
+		    			<div class="gnitem col3">
+		    				<p><img src="{:ADDON_PUBLIC}/img/xqwyf.png" /></p>
+		    				<p>查询物业费</p>
+		    			</div>
+		    		</a>
+	    		</div>
+	    		<div class="col-xs-3">
+	    			<a href="{:U('ActivityList')}">
+		    			<div class="gnitem col3">
+		    				<p><img src="{:ADDON_PUBLIC}/img/xqhd.png" /></p>
+		    				<p>小区活动</p>
+		    			</div>
+	    			</a>
+	    		</div>
+	    		<div class="col-xs-3">
+	    			<a href="{:U('CarpoolingList')}">
+		    			<div class="gnitem col3">
+		    				<p><img src="{:ADDON_PUBLIC}/img/xqpc.png" /></p>
+		    				<p>小区拼车</p>
+		    			</div>
+	    			</a>
+	    		</div>
+	    		<div class="col-xs-3">
+	    			<a href="{:U('Rentallist')}">
+		    			<div class="gnitem col3">
+		    				<p><img src="{:ADDON_PUBLIC}/img/xqfwzl.png" /></p>
+		    				<p>房屋租赁</p>
+		    			</div>
+	    			</a>
+	    		</div>
+	    		<div class="col-xs-3">
+	    			<a href="{:U('advertisementList',array('adposition'=>'2'))}">
+		    			<div class="gnitem col3">
+		    				<p><img src="{:ADDON_PUBLIC}/img/xqjzfw.png" /></p>
+		    				<p>家政服务</p>
+		    			</div>
+	    			</a>
+	    		</div>
+	    		<div class="col-xs-3">
+	    			<a href="{:U('FleamarketList')}">
+		    			<div class="gnitem col3">
+		    				<p><img src="{:ADDON_PUBLIC}/img/xqtzsc.png" /></p>
+		    				<p>跳蚤市场</p>
+		    			</div>
+	    			</a>
+	    		</div>
+    		</div>
+		</div>
+	</body>
+	<script>
+		var mySwiper1 = new Swiper('.swiper-container1', {
+				pagination : '.pager1',
+				paginationClickable :true,
+				autoplay: 5000,//可选选项，自动滑动
+				loop : true,
+			});
+	</script>
+</html>

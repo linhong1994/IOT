@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>选择小区</title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		
+		<div class="bar bar-header bar-light item-input-inset" style="position: fixed;top: 0;">
+			
+			<form action="{:U('select')}" method="post" class="bar bar-header bar-light item-input-inset">
+				
+				<label class="item-input-wrapper">
+					<i class="icon ion-ios-search placeholder-icon"></i>
+					<input name="keywork" type="search" value="{$keywork}" placeholder="小区名称">
+				</label>
+				<button type="submit" class="button button-clear">搜索</button>
+			</form>
+		</div>
+		<div class="bar bar-header bar-assertive"> 
+			<h1 class="title">选择小区</h1>
+		</div>
+		<div class="content">
+			<div class="list">
+				<present name="bind">
+					<foreach name="info" item="vo" >
+					    <a class="item" href="{:U('bind',array( 'id' => $vo['id'],'xqname'=>$vo['name']))}">
+							<h2>{$vo.name}</h2>
+							<span class="xqdizhi">地址:{$vo.address}</span>
+						</a>
+					</foreach>
+					<else /> 
+					<foreach name="info" item="vo" >
+					    <a class="item" href="{:U('tryout',array( 'id' => $vo['id'],'xqname'=>$vo['name']))}">
+							<h2>{$vo.name}</h2>
+							<span class="xqdizhi">地址:{$vo.address}</span>
+						</a>
+					</foreach>
+				</present> 
+			</div>
+		</div>
+	</body>
+</html>

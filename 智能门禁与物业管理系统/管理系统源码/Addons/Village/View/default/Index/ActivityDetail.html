@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<style>
+			body{
+				background:#E7E7E7;
+			}
+				html{overflow: auto;}
+		body{overflow: auto;}
+		.item-input input{
+			
+		}
+		</style>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">{$activity.title}</h1>
+		</div>
+		<div class="content">
+			<img class="xqhddetailimg" src="{$activity.banner}" />
+			<div class="xqhddetailtitle">
+				
+				<h3>
+					活动标题
+					<eq name="item['type']" value="1">
+						<span>火热报名中...</span>
+					</eq>
+				</h3>
+			</div>
+			<div class="xqdddetailinfo">
+				<p>活动开始时间:<span>{$activity.startTime}</span></p>
+				<p>活动结束时间:<span>{$activity.stopTime}</span></p>
+				<p>报名截止时间:<span>{$activity.registerTime}</span></p>
+				<p>报名电话:<span><a href="tel:{$activity.tel}">{$activity.tel}</a></span></p>
+			</div>
+			
+			<div class="bg"></div>
+			<div class="xqhddetailtitle">
+				<h3>活动描述</h3>
+			</div>
+			<div class="xqdddetailinfo">
+				{$activity.describe}
+			</div>
+		</div>
+	</body>
+</html>

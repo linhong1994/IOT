@@ -1,0 +1,254 @@
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/select2/select2.min.css">
+<include file="Public/adminheader" /> 
+
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">小区管理</a></li>
+        <li class="active">房间列表</li>
+      </ol>
+    </section>
+    <section  class="content">
+		 
+	    	<div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">房间列表</h3>
+			  <div class="box-tools" style="right: 340px;">
+			  	<div class="input-group input-group-sm" style="width: 30px;">
+                  <div class="input-group-btn">
+					<a href="Uploads/Download/%E6%88%BF%E9%97%B4%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xls" class="btn btn-default">导入模板下载</a>
+                  </div>
+                </div>
+              </div>
+			  <div class="box-tools" style="right: 250px;">
+			  	<div class="input-group input-group-sm" style="width: 30px;">
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default" id="addroom" data-toggle="modal" data-target="#myModal2">EXCEL导入</button>
+                  </div>
+                </div>
+              </div>
+			  <div class="box-tools" style="right: 200px;">
+			  	<div class="input-group input-group-sm" style="width: 30px;">
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default" id="addroom" data-toggle="modal" data-target="#myModal">添加</button>
+                  </div>
+                </div>
+              </div>
+              <div class="box-tools">
+              	<form action="" method="post">
+	                <div class="input-group input-group-sm" style="width: 150px;">
+	                  <input type="text" name="searchuser" class="form-control pull-right" value="{$searchuser}" placeholder="业主姓名">
+	
+	                  <div class="input-group-btn">
+	                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+	                  </div>
+	                </div>
+                </form>
+              </div>
+              
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tr>
+                  <th>楼栋</th>
+                  <th>单元</th>
+                  <th>室</th>
+                  <th>业主</th>
+                  <th>电话</th>
+                  <th>人数</th>
+                  <th>装修</th>
+                  <th>状态</th>
+                  <th>操作</th>
+                </tr>
+                <volist name="list" id="data">
+					<tr>
+	                    <td>{$data.building}</td>
+	                    <td>{$data.unit}</td>
+	                    <td>{$data.room}</td>
+	                    <td>{$data.name}</td>
+	                    <td>{$data.tel}</td>
+	                    <td>{$data.population}</td>
+	                    <td>
+	                    	<switch name="data.Decoration">    
+	                    		<case value="1">正在装修</case>    
+	                    		<case value="2">已装修</case>    
+	                    		<default />未装修
+	                    	</switch>
+	                    </td>
+	                    <td>
+	                    	<switch name="data.type">    
+	                    		<case value="1">出租房</case>    
+	                    		<case value="2">未出售</case>    
+	                    		<default />业主自住
+	                    	</switch>
+	                    </td>
+	                    <td>
+	                    	<a href="javascript:void(0)" class="update" data-toggle="modal" data-target="#myModal" data-id="{$data.id}" data-building="{$data.building}" data-name="{$data.name}" data-tel="{$data.tel}" data-unit="{$data.unit}" data-room="{$data.room}" data-population="{$data.population}" data-Decoration="{$data.Decoration}" data-type="{$data.type}">修改</a> 丨 
+	                    	<a href="javascript:void(0)" onclick="if(confirm('确认删除吗？')){location.href='{:U('removeRoom',array('roomid'=>$data['id']))}'}">删除</a>
+	                    </td>
+	                </tr>
+				</volist>
+
+              </table>
+            </div>
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                {$page}
+              </ul>
+            </div>
+             
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+      
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">添加房间</h4>
+		      </div>
+		      <div class="modal-body">
+					<form action="{:U('addRoom')}" method="post" class="form-horizontal">
+						<input type="hidden" name="id" id="rid" value=""/>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">楼栋</label>
+			           		<div class="col-sm-10">
+				                <input type="text" class="form-control" name="building" id="building" placeholder="楼栋" required="required"/>
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">单元</label>
+			           		<div class="col-sm-10">
+				                <input type="text" class="form-control" name="unit" id="unit" placeholder="单元"/>
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">室</label>
+			           		<div class="col-sm-10">
+				               	<input type="text" class="form-control" name="room" id="room" placeholder="室" required="required"/>
+			                </div>
+			            </div>
+			             <div class="form-group">
+			                <label class="col-sm-2 control-label">业主</label>
+			           		<div class="col-sm-10">
+				               	<input type="text" class="form-control" name="name" id="name" placeholder="业主" required="required"/>
+			                </div>
+			            </div>
+			             <div class="form-group">
+			                <label class="col-sm-2 control-label">电话</label>
+			           		<div class="col-sm-10">
+				               	<input type="text" class="form-control" name="tel" id="tel" placeholder="电话" required="required"/>
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">人数</label>
+			           		<div class="col-sm-10">
+				               	<input type="text" class="form-control" name="population" id="population" placeholder="人数"/>
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">装修</label>
+			           		<div class="col-sm-10">
+				                <select name="Decoration" id="decoration" class="form-control" style="width: 100%;">
+				                	<option value="0">未装修</option>
+									<option value="1">正在装修</option>
+									<option value="2">已装修</option>
+				                </select>
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">状态</label>
+			           		<div class="col-sm-10">
+				                <select name="type" id="type" class="form-control" style="width: 100%;">
+				                	<option value="0">业主自住</option>
+									<option value="1">出租房</option>
+									<option value="2">未出售</option>
+				                </select>
+			                </div>
+			            </div>
+			            <div class="box-footer">
+			            	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			                <button type="submit"  class="btn btn-primary pull-right">确定</button>
+			            </div>
+			        </form>
+		              <!-- /.form-group -->
+		      </div>
+		    
+		    </div>
+		  </div>
+		</div>
+		
+		
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">EXCEL导入</h4>
+		      </div>
+		      <div class="modal-body">
+					<form action="{:U('importroom')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+			            <div class="form-group">
+			           		<div class="col-sm-10">
+				                <input type="file" name="excelfile"  required="required" >
+			                </div>
+			            </div>
+			            <div class="box-footer">
+			            	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			                <button type="submit"  class="btn btn-primary pull-right">导入</button>
+			            </div>
+			        </form>
+		              <!-- /.form-group -->
+		      </div>
+		    
+		    </div>
+		  </div>
+		</div>
+    </section>
+
+
+
+<include file="Public/adminfooter" />
+<script src="{:ADDON_PUBLIC}/plugins/select2/select2.full.min.js"></script>
+
+<script>
+	window.onload=function(){
+		$.fn.modal.Constructor.prototype.enforceFocus = function () { };
+		$(".select2").select2();
+	}
+	$("#addroom").click(function(){
+		$("#myModalLabel").text("添加房间");
+		$("#rid").val("");
+		$("#building").val("");
+		$("#unit").val("");
+		$("#room").val("");
+		$("#name").val("");
+		$("#tel").val("");
+		$("#population").val("");
+		$("#decoration").val(0);
+		$("#type").val(0);
+	});
+	$(".update").click(function(){
+		$("#myModalLabel").text("修改房间信息");
+		// alert($(this).data("decoration"));
+		$("#rid").val($(this).data("id"));
+		$("#building").val($(this).data("building"));
+		$("#unit").val($(this).data("unit"));
+		$("#room").val($(this).data("room"));
+		$("#name").val($(this).data("name"));
+		$("#tel").val($(this).data("tel"));
+		$("#population").val($(this).data("population"));
+		$("#decoration").val($(this).data("decoration"));
+		$("#type").val($(this).data("type"));
+	});
+</script>

@@ -1,0 +1,84 @@
+<include file="Public/adminheader" /> 
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">小区管理</a></li>
+        <li class="active">小区列表</li>
+      </ol>
+    </section>
+    <section  class="content">
+		 
+	 <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">小区列表</h3>
+
+              <div class="box-tools">
+              	<form action="{:U('villageLists')}" method="post">
+	              <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="villagesearch" class="form-control pull-right" value="{$villagesearch}" placeholder="小区名称">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </form>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <style>
+            	.table tbody tr td,.table th{
+            		text-align: center;
+            		vertical-align: middle;
+            	}
+            </style>
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tr>
+                  <th>编号</th>
+                  <th>小区名称</th>
+                  <th>小区地址</th>
+                  <th>图片</th>
+                  <th>物业电话</th>
+                  <th>开发商</th>
+                  <th>物业费</th>
+                  <th>添加时间</th>
+                  <th>操作</th>
+                </tr>
+                <volist name="list" id="data">
+					<tr>
+	                    <td>{$data.id}</td>
+	                    <td>{$data.name}</td>
+	                    <td>{$data.address}</td>
+	                    <td><img src="{$data.imgURL}" style="height: 50px;width: 50px"></td>
+	                    <td>{$data.tel}</td>
+	                    <td>{$data.property}</td>
+	                    <td>{$data.villagefee}元</td>
+	                    <td>{$data.addDate}</td>
+	                    <td>&nbsp;&nbsp;<a href="javascript:void(0)" onclick="if(confirm('确认删除该小区吗？')){location.href='{:U('villageremove',array('vid'=>$data['id']))}'}">删除</a></td>
+	                </tr>
+				</volist>
+
+              </table>
+            </div>
+            <!-- /.box-body -->
+             <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+              	{$page}
+
+              </ul>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </section>
+
+
+
+<include file="Public/adminfooter" /> 

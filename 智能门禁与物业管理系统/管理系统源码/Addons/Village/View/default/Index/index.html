@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive"> 
+			<h1 class="title">Q小区</h1>
+			<a href="{:addons_url('Village://User/Sign')}" class="button">签到</a>
+		</div>
+		<div class="content">
+			<!--
+            	作者：15305031018@163.com
+            	时间：2016-05-04
+            	描述：轮播
+            -->
+			<div class="swiper-container swiper-container1" style="position: relative;">
+			  <div class="swiper-wrapper">
+					<foreach name="adlist" item="data" >
+					    <div class="swiper-slide">
+					    	<a href="{:U('advertisementDetail',array('adid'=>$data['id']))}">
+					    		<img class="lunboimg"  src="{$data.adimage}"/>
+					    	</a>
+					    </div>
+					</foreach>
+			  </div>
+			   <div class="swiper-pagination pager1" ></div>
+			</div>
+			
+			<!--
+            	作者：15305031018@163.com
+            	时间：2016-05-10
+            	描述：功能
+            -->
+            <div  class="swiper-container3"  style="position: relative;">
+				<div class="swiper-wrapper">
+			    	<div class="swiper-slide">
+			    		<div class="row">
+				    		<div class="col-xs-4" style="border-right: 1px solid #EDEDED;border-bottom: 1px solid #EDEDED;background-color: red; ">
+				    			<a href="{:addons_url("Village://Ks/index")}">
+					    			<div class="gnitem col6">
+					    				<p style="padding-right: 5px;color: white;font-weight: bold;  ">门禁Q钥匙</p>
+					    				<p><img src="{:ADDON_PUBLIC}/img/yaoshi.png"  /></p> 
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-4" style="border-right: 1px solid #EDEDED; background-color: red;">
+				    			<a href="{:U('pmfQuery')}">
+					    			<div class="gnitem col6">
+					    				<p style="padding-right: 5px;color: white;font-weight: bold;">物业费账单</p>
+					    				<p><img src="{:ADDON_PUBLIC}/img/zhangdan.png" /></p>
+					    			
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-4" style="border-right: 1px solid #EDEDED;background-color: red; ">
+				    			<a href="{:U('villageserver')}">
+					    			<div class="gnitem col6">
+					    				<p style="padding-right: 5px;color: white;font-weight: bold;">物业服务</p>
+					    				<p><img src="{:ADDON_PUBLIC}/img/wuyefuwu.png" /></p>
+					    			 
+					    			</div>
+				    			</a>
+				    		</div>
+ 
+
+			    		</div>
+			   		</div>
+			   		<div class="swiper-slide">
+			    		<div class="row">
+			    			<div class="col-xs-4" style="border-right: 1px solid #EDEDED;background-color: red; ">
+				    			<a href="{:U('SmartQserver')}">
+					    			<div class="gnitem col6">
+					    				<p style="padding-right: 5px;color: white;font-weight: bold;">智能Q服务</p>
+					    				<p><img src="{:ADDON_PUBLIC}/img/zhinengqfuwu.png"/></p>
+					    				
+					    			</div>
+				    			</a>
+				    		</div>
+			    			<div class="col-xs-4 " style="border-right: 1px solid #EDEDED;background-color: red;">
+			    				<a href="{:U('lifeQserver')}">
+					    			<div class="gnitem col6">
+					    				<p style="padding-right: 5px;color: white;font-weight: bold;">生活Q服务</p>
+					    				<p><img src="{:ADDON_PUBLIC}/img/shenghuoqfuwu.png"/></p>
+					    				
+					    			</div>
+				    			</a>
+				    		</div>
+
+			    		</div>
+		    		</div>
+			   	</div>
+			   	
+				<div class="swiper-pagination pager3" ></div> 
+			</div>
+	
+						<!--
+            	作者：15305031018@163.com
+            	时间：2016-05-10
+            	描述：公告
+            -->
+            <div class="bg" style="height: 1px;"></div>
+			<div class="lbgg">
+				<div class="left">
+					<i class="ionic ion-volume-high"></i><span style="font-size: 15px;;position: absolute;top: 7px;left:25px;color: black;">小区通知:</span>
+				</div>
+				<div class="right">
+					<div style="height: 35px;overflow: hidden;">
+						<div class="swiper-container2">
+						  <div class="swiper-wrapper">
+							<volist name="villagenoticelist" id="data">
+						    <div class="swiper-slide">{$data.title}</div>
+							</volist>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg" style="height: 1px;"></div>
+			
+			
+			<div  class="swiper-container3"  style="position: relative;">
+				<div class="swiper-wrapper">
+			    	<div class="swiper-slide">
+			    		<div class="row">
+				    		<div class="col-xs-3">
+				    			<a href="{:U('NoticeList')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqgg.png" /></p>
+					    				<p>小区公告</p>
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-3">
+				    			<a href="{:U('CellRepair')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqbx.png" /></p>
+					    				<p>小区报修</p>
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-3">
+				    			<a href="{:U('pmfQuery')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqwyf.png" /></p>
+					    				<p>查询物业费</p>
+					    			</div>
+					    		</a>
+				    		</div>
+				    		<div class="col-xs-3">
+				    			<a href="{:U('ActivityList')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqhd.png" /></p>
+					    				<p>小区活动</p>
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-3">
+				    			<a href="{:U('CarpoolingList')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqpc.png" /></p>
+					    				<p>小区拼车</p>
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-3">
+				    			<a href="{:U('Rentallist')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqfwzl.png" /></p>
+					    				<p>房屋租赁</p>
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-3">
+				    			<a href="{:U('advertisementList',array('adposition'=>'2'))}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqjzfw.png" /></p>
+					    				<p>家政服务</p>
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-3">
+				    			<a href="{:U('FleamarketList')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqtzsc.png" /></p>
+					    				<p>跳蚤市场</p>
+					    			</div>
+				    			</a>
+				    		</div>
+			    		</div>
+			   		</div>
+			   		<div class="swiper-slide">
+			    		<div class="row">
+			    			<div class="col-xs-3">
+			    				<a href="{:U('Complaint')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqtsjy.png" /></p>
+					    				<p>投诉服务</p>
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-3">
+				    			<a href="{:U('Lifenav')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqshdh.png" /></p>
+					    				<p>生活导航</p>
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-3">
+				    			<a href="{:addons_url('Village://User/Sign')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqqdyl.png" /></p>
+					    				<p>签到有礼</p>
+					    			</div>
+				    			</a>
+				    		</div>
+				    		<div class="col-xs-3">
+				    			<a href="{:U('GuideList')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqbszn.png" /></p>
+					    				<p>办事指南</p>
+					    			</div>
+				    			</a>
+			    			</div>
+			    			<div class="col-xs-3">
+				    			<a href="{:U('news')}">
+					    			<div class="gnitem col3">
+					    				<p><img src="{:ADDON_PUBLIC}/img/xqgg.png" /></p>
+					    				<p>最新消息</p>
+					    			</div>
+				    			</a>
+			    			</div>
+			    		</div>
+		    		</div>
+			  </div>	
+				<div class="swiper-pagination pager3" ></div>
+			</div>
+			<div class="bg" style="height: 1px;"></div>
+
+			
+			<!--
+            	作者：15305031018@163.com
+            	时间：2016-05-10
+            	描述：小区商户
+            -->
+			<!--<div class="xqsh">
+				<a href="http://www.baidu.com">
+					<div class="xqsjtitle">
+						<i class="ionic ion-ios-cart red"></i>
+						<span>跳蚤市场</span>
+						<i class="ionic ion-ios-arrow-right right"></i>
+					</div>
+				</a>
+				<div class="xqshlist">
+					<div class="xqshitem">
+						<a class="href " href="dingwei.html">
+							<img src="{:ADDON_PUBLIC}/img/bmw.jpg" />
+							<div class="xqshiteminfo">
+								<h4>水果蛋糕</h4>
+								<p class="itemxq">aasds111111111111111111111111111111111111111111111111111111111a</p>
+								<p class="itemprice">$188.00 <span><i class="ionic ion-eye"></i>111</span></p>
+							</div>
+						</a>
+					</div>
+					<div class="xqshitem">
+						<a class="href " href="dingwei.html">
+							<img src="{:ADDON_PUBLIC}/img/bmw.jpg" />
+							<div class="xqshiteminfo">
+								<h4>水果蛋糕</h4>
+								<p class="itemxq">aasds111111111111111111111111111111111111111111111111111111111a</p>
+								<p class="itemprice">$188.00 <span><i class="ionic ion-eye"></i>111</span></p>
+							</div>
+						</a>
+					</div>
+					<div class="more">
+						<a href="http://www.baidu.com"><p style="text-align: center;">查看更多</p></a>
+					</div>
+				</div>
+			</div>-->
+			
+			<!--<div class="bg" style="height: 1px;"></div>	
+			
+			<div class="xqsh">
+				<a href="http://www.baidu.com">
+					<div class="xqsjtitle">
+						<i class="ionic ion-soup-can red"></i>
+						<span>积分商城</span>
+						<i class="ionic ion-ios-arrow-right right"></i>
+					</div>
+				</a>
+				<div class="xqshlist">
+					<div class="xqshitem">
+						<img src="{:ADDON_PUBLIC}/img/bmw.jpg" />
+						<div class="xqshiteminfo">
+							<h4>水果蛋糕</h4>
+							<p class="itemxq">aasds111111111111111111111111111111111111111111111111111111111a</p>
+							<p class="itemprice"><i style="color: black;">积分:</i>188.00 </p>
+						</div>
+					</div>
+					<div class="xqshitem">
+						<a class="href " href="dingwei.html">
+							<img src="{:ADDON_PUBLIC}/img/bmw.jpg" />
+							<div class="xqshiteminfo">
+								<h4>水果蛋糕</h4>
+								<p class="itemxq">aasds111111111111111111111111111111111111111111111111111111111a</p>
+								<p class="itemprice"><i style="color: black;">积分:</i>188.00</p>
+							</div>
+						</a>
+					</div>
+					<div class="more">
+						<a href="http://www.baidu.com"><p style="text-align: center;">查看更多</p></a>
+					</div>
+				</div>
+			</div>-->
+<!--			
+			<div class="bg" style="height: 1px;"></div>
+			
+			<div class="bszn">
+				<a href="http://www.baidu.com">
+					<div class="xqsjtitle">
+						<i class="ionic ion-clipboard red"></i>
+						<span>办事指南</span>
+						<i class="ionic ion-ios-arrow-right right"></i>
+					</div>
+				</a>
+				<div class="list">
+					<a href="" class="item">如何办理户口迁入手续</a>
+					<a href="" class="item">如何办理户口迁入手续</a>
+					<a href="" class="item">如何办理户口迁入手续</a>
+					<a href="" class="item">如何办理户口迁入手续</a>
+					<a href="" class="item">如何办理户口迁入手续</a>
+					<div class="more">
+						<a href="http://www.baidu.com"><p style="text-align: center;">查看更多</p></a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="bg" style="height: 1px;"></div>
+			
+		-->
+			<div class="xqhd">
+				<a href="http://www.baidu.com">
+					<div class="xqsjtitle">
+						<i class="ionic ion-person-stalker red"></i>
+						<span>小区活动</span>
+						<i class="ionic ion-ios-arrow-right right"></i>
+					</div>
+				</a>
+				<div class="list">
+					<volist name="activitylist" id="data">
+					<a href="" class="item xqhditem">
+						<img src="{$data.banner}" />
+							<div class="xqhdinfo">
+								<h4>{$data.title}</h4>
+								<p>{$data.startTime}</p>
+								<p>{$data.stopTime}</p>
+								<p>已报名人数:<span style="color: red;">{$data.regNumber}</span>人</p>
+							</div>
+					</a>
+					</volist>
+					<div class="more">
+						<a href="{:U('ActivityList')}"><p style="text-align: center;">查看更多</p></a>
+					</div>
+				</div>
+			</div>
+			<div class="bg" style="height: 1px;"></div>
+			<div style="height: 0px;"></div>
+		</div>
+		<div style="width: 100%;height: 50px;"></div>
+		<div class="tabs tabs-icon-top tabs-background-positive  tabs-color-light " style="position: fixed;bottom: 0;z-index: 999;background: red;">
+			<a href="{:U('index')}" class="tab-item active">
+				<i class="icon ion-ios-home"></i>
+			         首页
+			</a>
+			<a href="http://tp.sojump.cn/jq/8896451.aspx" class="tab-item">
+				<i class="icon ion-compose"></i>
+				互动
+			</a>
+			<a href="tel:{$tel}" class="tab-item" >
+				<i class="icon ion-ios-people"></i>
+				联系物业
+				
+			</a>
+			<a href="{:U('error')}" class="tab-item" >
+				<i class="icon ion-ios-people"></i>
+				商城
+				
+			</a>
+			<a href="{:addons_url('Village://User/my')}" class="tab-item">
+				<i class="icon ion-ios-contact"></i>
+				我
+			</a>
+		</div>
+	</body>
+			<script>
+			var mySwiper1 = new Swiper('.swiper-container1', {
+				pagination : '.pager1',
+				paginationClickable :true,
+				autoplay: 5000,//可选选项，自动滑动
+				loop : true,
+			});
+			var mySwiper2 = new Swiper('.swiper-container2', {
+				
+				autoplay: 2000,//可选选项，自动滑动
+				loop : true,
+			})
+			var mySwiper3 = new Swiper('.swiper-container3', {
+				pagination : '.pager3',
+			})
+			var mySwiper3 = new Swiper('.swiper-container4', {
+				pagination : '.pager4',
+			})
+		</script>
+</html>

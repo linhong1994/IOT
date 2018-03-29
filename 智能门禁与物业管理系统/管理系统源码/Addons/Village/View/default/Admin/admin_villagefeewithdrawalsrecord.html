@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/select2/select2.min.css">
+<include file="Public/adminheader" /> 
+
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>	
+        <li >小区管理</li>
+        <li class="active">提现记录</li>
+      </ol>
+    </section>
+    <section  class="content">
+		
+		<div class="row">
+	        <div class="col-xs-12">
+	          <div class="box">
+	            <div class="box-header">
+	              <h3 class="box-title">提现记录</h3>
+	 			<div class="box-tools">
+	              	<form action="{:U('admin_villagefeewithdrawalsrecord')}" method="post" id="userform">
+	
+	              		<div class="input-group input-group-sm" style="width: 150px;float: left;">
+	              			<label for="state" style="float: left;padding-top: 5px;" class=" control-label">状态</label>
+			
+			                
+		              			<select name="vid" class="form-control" style="width: 100px;"  onchange="$('#userform').submit();">
+		              				<option value="">不限</option>
+		              				<foreach name='villagelist' item="item">
+		              					<option value="{$item.id}" <if condition="$item['id'] eq $vid">selected="selected"</if>>{$item.name}</option>
+		              				</foreach>
+		              			</select>	
+	              			
+	              		</div>
+		                
+	                </form>
+             	 </div>
+	              
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body table-responsive no-padding">
+	              <table class="table table-hover">
+	                <tr>
+	                   <th>编号</th>
+	                  <th>小区</th>  
+	                  <th>金额</th>
+	                  <th>剩余金额</th>
+	                  <th>提现管理员</th>
+	                  <th>提现时间</th>
+	                </tr>
+	                <volist name="list" id="data">
+						<tr>
+
+		                    <td>{$data.id}</td>
+		                    <td>{$data.villagename}</td>
+		                    <td>{$data.money}</td>
+	                   		<td>{$data.surplus}</td>
+		                    <td>{$data.adminname} </td>
+		                    <td>{$data.datetime} </td>
+		                </tr>
+					</volist>
+	
+	              </table>
+	            </div>
+	            <div class="box-footer clearfix">
+	              <ul class="pagination pagination-sm no-margin pull-right">
+	                {$page}
+	              </ul>
+	            </div>
+	             
+	            <!-- /.box-body -->
+	          </div>
+	          <!-- /.box -->
+	        </div>
+	   </div>
+        
+    </section>
+
+
+
+<include file="Public/adminfooter" />
+      	<script>
+      	 		function insertfee(building,unit,room,date1){
+	      			var iNumber = Number(prompt("请输入物业费"));
+	      			if(iNumber==null||iNumber==""){
+	      				return;
+	      			}
+					if(isNaN(iNumber))  //判断输入的是否是数字
+						alert("请确认你的输入正确");
+					else if(iNumber < 0)  //判断输入的数字范围
+					 	alert("你输入的数小于0");
+					else if(iNumber==0)
+						alert("你输入的数等于0");
+					else{
+						if(confirm("录入后将不可修改，是否确定录入"))
+						{
+							$.post("{:U("villagefeeinsert")}",{building:building,unit:unit,room:room,feedate:date1,fee:iNumber},function(data){
+		      					if(data.result=="success"){
+		      						alert('录入成功');
+		      						window.location.reload("{:U('villagefeelist')}");
+		      					}
+		      					else{
+		      						alert(data.result);
+		      					}
+		      				});
+	      				}
+					}
+	      		}    
+	      	
+      	</script>

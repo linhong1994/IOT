@@ -1,0 +1,216 @@
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/select2/select2.min.css">
+<include file="Public/adminheader" /> 
+
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>	
+        <li >物业费管理</li>
+        <li class="active">物业费录入</li>
+      </ol>
+    </section>
+    <section  class="content">
+		
+		<div class="row">
+	        <div class="col-xs-12">
+	          <div class="box">
+	            <div class="box-header">
+	              <h3 class="box-title">物业费录入</h3>
+				  <div class="box-tools" style="right: 340px;">
+					<div class="input-group input-group-sm" style="width: 30px;">
+					  <div class="input-group-btn">
+						<a href="Uploads/Download/%E7%89%A9%E4%B8%9A%E8%B4%B9%E5%BD%95%E5%85%A5%E6%A8%A1%E6%9D%BF.xls" class="btn btn-default">导入模板下载</a>
+					  </div>
+					</div>
+				  </div>
+				  <div class="box-tools" style="right: 250px;">
+					<div class="input-group input-group-sm" style="width: 30px;">
+					  <div class="input-group-btn">
+						<button type="submit" class="btn btn-default" id="addroom" data-toggle="modal" data-target="#myModal2">EXCEL导入</button>
+					  </div>
+					</div>
+				  </div>
+				 <div class="box-tools">
+	              	<form action="{:U('villagefeelist')}" method="post" id="userform">
+	
+	              		<div class="input-group input-group-sm" style="width: 150px;float: left;">
+	              			<label for="state" style="float: left;padding-top: 5px;" class=" control-label">状态</label>
+			
+			                
+		              			<select name="insertstate" class="form-control" style="width: 100px;"  onchange="$('#userform').submit();">
+		              				<option value="0" <if condition="$insertstate eq 0">selected="selected"</if>>不限</option>
+		              				<option value="1" <if condition="$insertstate eq 1">selected="selected"</if>>未录入</option>
+		              				<option value="2" <if condition="$insertstate eq 2">selected="selected"</if>>已录入</option>
+		              			</select>	
+	              			
+	              		</div>
+		                
+	                </form>
+             	 </div>
+	              
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body table-responsive no-padding">
+	              <table class="table table-hover">
+	                <tr>
+	                  <th>业主地址</th>
+	                  <th>上个月份</th>  
+	                  <th>物业费</th>
+	                  <th>缴费状态</th>
+	                  <th>操作</th>
+	                </tr>
+	                <volist name="roomarray" id="data">
+						<tr>
+
+		                    <td style="vertical-align: middle;">{$data.building}栋-{$data.unit}单元-{$data.room}室</td>
+		                    <td style="vertical-align: middle;">{$data.feedate}</td>
+		                    <td>
+								<empty name="data['fee']">
+									<span style="color: red;">未录入</span>
+							    <else /> 
+							    	<span style="color:cornflowerblue;">{$data.fee}元</span>
+								</empty>
+	                   		</td>
+	                   		<td>
+	                   			<if condition="$data['paystate'] eq 0 ">
+	                   				<span style="color: red;">未缴费</span>
+								    <else />
+								    <span style="color:cornflowerblue;"> 已缴费</span>
+								</if>
+	                   		</td>
+		                    <td style="vertical-align: middle;">
+
+		                    	<empty name="data['fee']">
+									<a href="javascript:void(0)" onclick="insertfee({$data.building},{$data.unit},{$data.room},'{$data.feedate}')">录入</a>
+							    <else /> 
+							    	<if condition="$data['paystate'] eq 0 ">
+							    		<a href="javascript:void(0)" onclick="if(confirm('请确认该住户已线下支付')){location.href='{:U('villagefeepayforoutline',array('feeid'=>$data['feeid']))}'}">线下缴费</a>
+									</if>
+		                    	</empty>
+		                    </td>
+		                </tr>
+					</volist>
+	
+	              </table>
+	            </div>
+	            <div class="box-footer clearfix">
+	              <ul class="pagination pagination-sm no-margin pull-right">
+	                {$page}
+	              </ul>
+	            </div>
+	             
+	            <!-- /.box-body -->
+	          </div>
+	          <!-- /.box -->
+	        </div>
+	  </div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <form class="form-horizontal" action="{:U('villagefeeinsert')}" method="post">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<div class="form-group">
+		      			<label class="col-sm-3 control-label">住户</label>
+	               		<div class="col-sm-2">
+			                <input type="text" name="building" class="form-control" readonly="readonly" required="required">
+						</div>
+						<label class="control-label" style="float: left;">楼</label>
+	               		<div class="col-sm-2">
+			                <input type="text" name="unit" class="form-control" readonly="readonly" required="required">
+						</div>
+						<label class=" control-label" style="float: left;">单元</label>
+						<div class="col-sm-2">
+			                <input type="text" name="room" class="form-control" readonly="readonly" required="required">
+						</div>
+						<label class="control-label" style="float: left;">室</label>
+			        </div>
+
+			         <div class="form-group">
+	               		<label class="col-sm-3 control-label">上个月份</label>
+	               		<div class="col-sm-9">
+			                <input type="text" name="feedate" class="form-control" readonly="readonly" required="required">
+						</div>
+			        </div>
+			        <div class="form-group">
+	               		<label class="col-sm-3 control-label">物业费</label>
+	               		<div class="col-sm-9">
+			                <input type="number" step="0.01" min="0" name="villagefee" class="form-control"  required="required">
+						</div>
+			        </div>
+			        <div class="form-group">
+	               		<label class="col-sm-3 control-label">公摊水费</label>
+	               		<div class="col-sm-9">
+			                <input type="number" step="0.01" min="0" name="publicwaterfee" class="form-control"  required="required">
+						</div>
+			        </div>
+			        <div class="form-group">
+	               		<label class="col-sm-3 control-label">公摊电费</label>
+	               		<div class="col-sm-9">
+			                <input type="number" step="0.01" min="0" name="publicelectricityfee" class="form-control"  required="required">
+						</div>
+			        </div>
+			        <div class="form-group">
+	               		<label class="col-sm-3 control-label">其他费用</label>
+	               		<div class="col-sm-9">
+			                <input type="number" step="0.01" min="0" name="otherfee" class="form-control" required="required">
+						</div>
+			        </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		        <button type="submit" class="btn btn-primary" >录入</button>
+		      </div>
+		      </form>
+		    </div>
+		  </div>
+		</div>
+
+
+		
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">EXCEL导入</h4>
+		      </div>
+		      <div class="modal-body">
+					<form action="{:U('importfee')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+			            <div class="form-group">
+			           		<div class="col-sm-10">
+				                <input type="file" name="excelfile"  required="required" >
+			                </div>
+			            </div>
+			            <div class="box-footer">
+			            	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			                <button type="submit"  class="btn btn-primary pull-right">导入</button>
+			            </div>
+			        </form>
+		              <!-- /.form-group -->
+		      </div>
+		    
+		    </div>
+		  </div>
+		</div>
+    </section>
+
+
+
+<include file="Public/adminfooter" />
+      	<script>
+      	 		function insertfee(building,unit,room,date1){
+      	 			$('input[name="building"]')[0].value=building;
+      	 			$('input[name="unit"]')[0].value=unit;
+      	 			$('input[name="room"]')[0].value=room;
+      	 			$('input[name="feedate"]')[0].value=date1;
+					$('#myModal').modal();
+	      		}    
+	      	
+      	</script>

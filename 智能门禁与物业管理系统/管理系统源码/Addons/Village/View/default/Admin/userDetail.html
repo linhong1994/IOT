@@ -1,0 +1,286 @@
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/select2/select2.min.css">
+<include file="Public/adminheader" /> 
+
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">用户管理</a></li>
+        <li class="active">用户列表</li>
+      </ol>
+    </section>
+    <section  class="content">
+		<div class="row">
+	        <div class="col-md-12 col-lg-6">
+	            <div class="box">
+		            <div class="box-header with-border">
+		              <h3 class="box-title">用户信息</h3>
+		            </div>
+		            <div class="box-body">
+		            	<style>
+		            		.tabletitle{
+		            			font-weight: bold;
+		            		}
+		            	</style>
+		                <table class="table table-bordered">
+							<tr>
+								<td class="tabletitle">用户ID</td>
+								<td>{$userinfo.id}</td>
+								<td class="tabletitle">姓名</td>
+								<td>{$userinfo.name}</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">状态</td>
+								<td>
+									<if condition="$userinfo.state eq 0 ">
+			                    		<span style="color: red;">未通过</span>
+								    <else /> 
+								    	<span style="color: cornflowerblue;">已通过</span>
+									</if>
+								</td>
+								<td class="tabletitle">手机号码</td>
+								<td>{$userinfo.phone}</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">小区</td>
+								<td>{$userinfo.villageID}</td>
+								<td class="tabletitle">楼栋</td>
+								<td>{$userinfo.building}楼</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">单元</td>
+								<td>{$userinfo.unit}单元</td>
+								<td class="tabletitle">室</td>
+								<td>{$userinfo.room}室</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">积分</td>
+								<td>{$userinfo.score}</td>
+								<td class="tabletitle">注册时间</td>
+								<td>{$userinfo.regtime}</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">openid</td>
+								<td title="{$userinfo.openid}">{$userinfo.openid}</td>
+								<td class="tabletitle">token</td>
+								<td>{$userinfo.token}</td>
+							</tr>
+		                </table>
+		            </div>  
+		            <div class="box-footer clearfix">
+		            	<div class="pull-right">
+		            		<if condition="$userinfo.state eq 0 ">
+				            	<form action="{:U('userexamine')}" method="post" onsubmit="return confirm('确认该用户通过审核？')" style="float: left;;margin:0 10px;">
+				            		<input type="hidden" name="userid" value="{$userinfo.id}" />
+				            		<input  class="btn btn-success" type="submit" value="通过审核"/>
+				            	</form>
+			            	</if>
+			            	<if condition="$userinfo.state eq 1">
+				            	<form action="{:U('addproperty')}" method="post" onsubmit="return confirm('确认设该用户为物业？')" style="float: left;;margin:0 10px;">
+				            		<input type="hidden" name="userid" value="{$userinfo.id}" />
+				            		<input  class="btn btn-success" type="submit" value="设为物业微信"/>
+				            	</form>
+			            	</if>
+			            	<form action="{:U('deleteuser')}" method="post" onsubmit="return confirm('确认删除该用户？')" style="float: left;;margin:0 10px;">
+			            		<input type="hidden" name="userid" value="{$userinfo.id}" />
+			            		<input  class="btn btn-success" type="submit" value="删除用户"/>
+			            	</form>
+			            	
+		            	</div>
+		            </div>
+	            </div>
+	        </div>
+
+
+			<div class="col-md-12 col-lg-6">
+	            <div class="box">
+		            <div class="box-header with-border">
+		              <h3 class="box-title">门禁信息</h3>
+		            </div>
+		            <div class="box-body">
+		            	<style>
+		            		.tabletitle{
+		            			font-weight: bold;
+		            		}
+		            	</style>
+		                <table class="table table-bordered">
+							<tr>
+								<td class="tabletitle">开通状态</td>
+								<td>
+									<switch name="userinfo.lock">    
+			                    		<case value="0"><font color="red">未开通或到期</font></case>    
+			                    		<case value="1"><font color="green">已开通</font></case>    
+			                    		<default />未开通或到期
+			                    	</switch>
+								</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">开通时间</td>
+								<td>{$userinfo.lstime}</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">到期时间</td>
+								<td>{$userinfo.letime}</td>
+
+							</tr>
+							<tr>
+								<td class="tabletitle">解锁权限</td>
+								<td>
+								<volist name="lockvn" id="vo">
+								{$vo.door}<br/>
+								</volist>
+								</td>
+							</tr>
+		                </table>
+		            </div>
+		            <div class="box-footer clearfix">
+		            	<if condition="$admin['grade'] eq !0">
+		            	<div class="pull-right">
+			            	<button type="submit" class="btn btn-success" id="editlock" data-toggle="modal" data-target="#myModal" data-id="{$userinfo.id}" data-lstime="{$userinfo.lstime}" data-letime="{$userinfo.letime}">开通/修改</button>
+		            	</div>
+		            	</if>
+		            </div>
+		        </div>
+	        </div>
+
+
+			
+			<div class="col-md-12 col-lg-6">
+	            <div class="box">
+		            <div class="box-header with-border">
+		              <h3 class="box-title">房间信息</h3>
+		            </div>
+		            <div class="box-body">
+		            	<style>
+		            		.tabletitle{
+		            			font-weight: bold;
+		            		}
+		            	</style>
+		                <table class="table table-bordered">
+							<tr>
+								<td class="tabletitle">楼栋</td>
+								<td>{$roominfo.building}</td>
+								<td class="tabletitle">单元</td>
+								<td>{$roominfo.unit}</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">室</td>
+								<td>{$roominfo.room}</td>
+								<td class="tabletitle">人数</td>
+								<td>{$roominfo.population}</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">状态</td>
+								<td>
+									<switch name="roominfo.type">    
+			                    		<case value="1">出租房</case>    
+			                    		<case value="2">未出售</case>    
+			                    		<default />业主自住
+			                    	</switch>
+								</td>
+								<td class="tabletitle">装修</td>
+								<td>
+									<switch name="roominfo.Decoration">    
+			                    		<case value="1">正在装修</case>    
+			                    		<case value="2">已装修</case>    
+			                    		<default />未装修
+			                    	</switch>
+								</td>
+							</tr>
+							<tr>
+								<td class="tabletitle">业主</td>
+								<td>{$roominfo.name}</td>
+								<td class="tabletitle">电话</td>
+								<td>{$roominfo.tel}</td>
+							</tr>
+		                </table>
+		            </div>  
+		        </div>
+	        </div>
+
+     	</div>
+	    	
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">开通/修改</h4>
+		      </div>
+		      <div class="modal-body">
+					<form action="{:U('userlockupdate')}" method="post" class="form-horizontal">
+						<input type="hidden" name="id" id="lid" value=""/>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">开通时间</label>
+			           		<div class="col-sm-10">
+				                <input type="text" class="form-control" name="lstime" id="lstime" placeholder="开通时间" required="required"/>
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">到期时间</label>
+			           		<div class="col-sm-10">
+				                <input type="text" class="form-control" name="letime" id="letime" placeholder="到期时间" required="required"/>
+			                </div>
+			            </div>
+			            <div class="form-group">
+			                <label class="col-sm-2 control-label">开锁权限</label>
+			           		<div class="col-sm-10">
+				                <select name="lockid[]" id="lockid" class="form-control select2" multiple="multiple" data-placeholder="选择门禁" style="width: 100%;">
+									<volist name="locklist" id="data">
+				                	<option value="{$data.id}">{$data.door}</option>
+									</volist>
+				                </select>
+			                </div>
+			            </div>
+			            <div class="box-footer">
+			            	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			                <button type="submit"  class="btn btn-primary pull-right">确定</button>
+			            </div>
+			        </form>
+		              <!-- /.form-group -->
+		      </div>
+		    
+		    </div>
+		  </div>
+		</div>        
+    </section>
+
+
+
+<include file="Public/adminfooter" />
+<script src="{:ADDON_PUBLIC}/plugins/select2/select2.full.min.js"></script>
+
+<script>
+	window.onload=function(){
+		$('#lstime').daterangepicker({
+		singleDatePicker: true,
+		timePicker: true,
+		timePicker12Hour: false,
+		timePickerIncrement: 10,
+		separator:'/',
+		format: 'YYYY-MM-DD H:mm:ss ',
+		});
+		$('#letime').daterangepicker({
+		singleDatePicker: true,
+		timePicker: true,
+		timePicker12Hour: false,
+		timePickerIncrement: 10,
+		separator:'/',
+		format: 'YYYY-MM-DD H:mm:ss ',
+		});
+		$.fn.modal.Constructor.prototype.enforceFocus = function () { };
+		$(".select2").select2();
+	}
+	$("#editlock").click(function(){
+		$("#myModalLabel").text("开通/修改门禁信息");
+		$("#lid").val($(this).data("id"));
+		$("#lstime").val($(this).data("lstime"));
+		$("#letime").val($(this).data("letime"));
+		$("#lockid").val("");
+
+	});
+
+</script>

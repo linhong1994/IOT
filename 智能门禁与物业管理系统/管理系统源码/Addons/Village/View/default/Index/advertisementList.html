@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+	<style>
+		body{
+			background:#E7E7E7;
+		}
+		.xqhdinfo{
+			border: none;
+		}
+	</style>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">{$title}</h1>
+		</div>
+		<div class="content">
+			<div class="list">
+				<volist name="adlist" id="item">
+					<p class="xqhddatetime"><span>{$item.addtime}</span></p>
+					<a href="{:U('advertisementDetail',array('adid'=>$item['id'] ))}" class="item iteminset">
+						<div class="xqggitemtitle">
+							{$item.adtitle}
+						</div>
+						<img src="{$item.adimage}"  class="xqhdlistimg"/>
+						<article class="xqhdlistinfo">
+							{$item.addes}
+						</article>
+						<div class="xqggtodetail">查看详情<i class="ionic ion-ios-arrow-right" style="float: right;"></i></div>
+					</a>
+				</volist>
+
+			</div>		
+		</div>
+		
+		
+	</body>
+</html>

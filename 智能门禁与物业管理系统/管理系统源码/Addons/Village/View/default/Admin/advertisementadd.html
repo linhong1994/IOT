@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/select2/select2.min.css">
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/iCheck/all.css">
+<include file="Public/adminheader" /> 
+
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">平台广告</a></li>
+        <li class="active">发布广告</li>
+      </ol>
+    </section>
+    <section  class="content">
+		<div class="row">
+
+        <!-- /.col (left) -->
+	        <div class="col-md-8">
+		        <form class="form-horizontal" action="{:U('advertisementadd')}" method="post" enctype="multipart/form-data">
+			        <div class="box box-primary">
+			            <div class="box-header">
+			              <h3 class="box-title">发布广告</h3>
+			            </div>
+			            <div class="box-body">
+			            	
+		            		<div class="form-group">
+			               		<label class="col-sm-3 control-label">广告名称</label>
+			               		<div class="col-sm-5">
+					                <input type="text" name="adtitle" class="form-control pull-right" required="required">
+								</div>
+			             	</div>
+			             	<div class="form-group">
+			               		<label class="col-sm-3 control-label">广告位置</label>
+			               		<div class="col-sm-5">
+
+					                <select name="adposition" class="form-control select2"  data-placeholder="选择广告位置" required="required" style="">
+					                  	
+										<option value="1">首页</option>
+										<option value="2">家政服务</option>
+										<option value="3">Q钥匙</option>
+										<option value="4">物业服务</option>
+					                </select>					           
+								</div>
+			             	</div>
+			             	
+			             	<div class="form-group">
+			               		<label class="col-sm-3 control-label">广告图片</label>
+			               		<div class="col-sm-5">
+					                <input type="file" name="adimage" accept="image/*" required="required" >
+								</div>
+			             	</div>
+			             	<div class="form-group">
+			               		<label class="col-sm-3 control-label">描述</label>
+			               		<div class="col-sm-9">
+					                <textarea id="editor1" name="addes" rows="10" cols="80" placeholder="描述活动信息"></textarea>
+								</div>
+			             	</div>
+
+						 
+		           		 </div>
+			            <div class="box-footer">
+			            	<p style="text-align: center;"> <button type="submit" class="btn btn-info">发布</button></p>
+				           
+				        </div>
+		         	</div>
+	          	</form>
+	
+	        </div>
+      </div>
+		
+      
+        
+    </section>
+
+
+
+<include file="Public/adminfooter" />
+<script src="{:ADDON_PUBLIC}/plugins/select2/select2.full.min.js"></script>
+<script src="{:ADDON_PUBLIC}/plugins/ckeditor/ckeditor.js"></script>
+<script>
+	window.onload=function(){
+
+		$.fn.modal.Constructor.prototype.enforceFocus = function () { };
+		$(".select2").select2();
+	    CKEDITOR.replace('editor1');
+
+	}
+</script>
+<style>
+
+</style>
+

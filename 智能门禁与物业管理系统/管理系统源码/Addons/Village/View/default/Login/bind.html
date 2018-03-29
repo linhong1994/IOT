@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<style>
+			.button:active{opacity: 0.5; }
+		</style>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back" style="font-size: 25px;z-index: 888;" onclick="window.history.back(-1)"></i>
+			<h1 class="title">绑定信息</h1>
+		</div>
+		<div class="content">
+			<form action="{:addons_url('Village://Login/bind')}" method="post">
+				<div class="list">
+					<label class="item item-input">
+						<span class="input-label">小区</span>
+						<input type="text" value="{$xqname}" readonly="readonly"/>
+					</label>
+					<label class="item item-input">
+						<span class="input-label">房间</span>
+						<select name="roomid"  class="form-control" >
+							<volist name="roomlist" id="data">
+							<option value="{$data.id}">{$data.building}栋{$data.unit}单元{$data.room}室</option>
+							</volist>
+						</select>
+					</label>
+					<label class="item item-input">
+						<span class="input-label">姓名</span>
+						<input type="text" name="name" placeholder="姓名" required="required"/>
+						
+					</label>
+					<label class="item item-input">
+						<span class="input-label">手机号码</span>
+						<input type="text" name="phone" onchange="phonechange(this.value)" placeholder="手机号码" required="required"/>
+						
+					</label>
+					<!--<input type="button" class="button"  id="send" disabled="true" onclick="sendsms()" style="float: right;margin-right: 2px;" value="发送验证码" />	-->
+						<label class="item item-input">
+							<span class="input-label">验证码</span>
+							<input type="text" name="verifyCode" placeholder="验证码" required="required">	
+							<input type="button" class="button button-balanced"   id="send" disabled="true" onclick="sendsms()" style="position: absolute;right: 0;top: 0px;" value="发送验证码" />	
+						</label>
+				</div>
+				<button type="submit" class="button button-full button-positive" style="background:red;border:0">提交</button>
+				
+			</form>
+		</div>
+		<div id="toast" style="display: none;">
+		    <div class="weui_mask_transparent"></div>
+		    <div class="weui_toast">
+		        <i class="weui_icon_toast"></i>
+		        <p class="weui_toast_content">发送成功</p>
+		    </div>
+		</div>
+		<script>
+		var time=0;
+		var disable=false;
+		var err=0;
+		function phonechange(ad){
+			//alert(ad);
+			if(ad=='undefine'||ad==null||ad==""){
+				$("#send").attr("disabled","disabled");
+			}
+			else{
+				 if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(ad))||ad.length!=11){
+        				//alert("错误手机号码格式错误\n");
+        				$("#send").attr("disabled","disabled");
+        				return;
+				 } 
+				 //alert("11");
+				 console.log(disable);
+				if(disable==false){
+					$("#send").removeAttr("disabled");
+				}
+			}
+		}
+		function sendsms(){
+			var phone=$("input[name='phone']")[0].value;
+			//alert("发送成功")
+			time=60;
+			$.get("{:addons_url('Village://Api/verifyCode')}",{mobile:phone},function(data){
+				if(data=="ok"){
+					$("#send").attr("disabled","disabled");
+					daojishi();
+					$("#toast").css('display','block');
+					disable=true;
+					setTimeout(function(){
+						$("#toast").css('display','none');
+					},500);
+				}
+				else{
+					alert(data);
+				}
+			})
+
+		}
+		function daojishi(){
+			setTimeout(function(){
+				time--;
+				if(time==0){
+					disable=false;
+					$("#send").removeAttr("disabled");
+					$("#send").val("发送验证码");
+					var phone=$("input[name='phone']")[0].value;
+					phonechange(phone);
+				}
+				else{
+					$("#send").val(time+"后可重发");
+					daojishi()
+				}
+			},1000);
+		}
+	</script>
+	</body>
+</html>

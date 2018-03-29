@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">报修服务</h1>
+		</div>
+		<div class="content">
+			<style>
+				input[type='radio']{
+					display: none;
+				}
+				.radioitem{
+					margin: 5px;
+					padding: 5px;
+					border: 1px solid black;
+				}
+				.radiocheck{
+					
+					border: 1px solid deepskyblue;
+					color: deepskyblue;
+					
+				}
+			</style>
+			<form action="{:addons_url('Village://Api/repair')}" method="post">
+				<div class="row">
+					<div class="item item-divider" style="text-align: center;">请选择报修类别 </div>
+					<label class="col-sm-3">
+						<input type="radio"name="title" value="电路故障" required="required">
+						<div class="radioitem radiocheck">电路故障</div>
+					</label>
+					<label class="col-sm-3">
+						<input type="radio"name="title" value="水电维修" required="required">
+						<div class="radioitem">水电维修</div>
+					</label>
+					<label class="col-sm-3">
+						<input type="radio"name="title" value="房屋维修" required="required">
+						<div class="radioitem">房屋维修</div>
+					</label>
+					<label class="col-sm-3">
+						<input type="radio"name="title" value="管道疏通" required="required">
+						<div class="radioitem">管道疏通</div>
+					</label>
+					<label class="col-sm-3">
+						<input type="radio"name="title" value="开锁/换锁" required="required">
+						<div class="radioitem">开锁/换锁</div>
+					</label>
+					<label class="col-sm-3">
+						<input type="radio"name="title" value="线路维修" required="required">
+						<div class="radioitem">线路维修</div>
+					</label>
+					<label class="col-sm-3">
+						<input type="radio"name="title" value="其他" required="required">
+						<div class="radioitem">其他</div>
+					</label>
+					<div class="item item-divider" style="text-align: center;">备注 </div>
+					<textarea name="content" style="width: 98%;margin: 1%;border: 1px solid #C0C0C0 ;height: 100px;"></textarea>
+				</div>
+				<button type="submit" class="weui_btn weui_btn_warn" style="width: 50%;margin-left: 25%;">提交</button>
+			</form>
+		</div>
+		<script>
+		window.onload=function(){
+			var radios=$('.radioitem');
+			radios.click(function(event){
+				$(radios).removeClass('radiocheck');
+				$(this).addClass('radiocheck');
+			})
+		}
+		</script>
+	</body>
+</html>

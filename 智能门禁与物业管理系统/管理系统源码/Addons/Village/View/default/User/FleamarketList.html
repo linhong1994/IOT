@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div class="bar bar-header bar-light">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">我的市场</h1>
+			<a href="{:addons_url('Village://Index/FleamarketAdd')}" class="button button-clear button-positive"><i class="ionic ion-plus-round"></i> 发布</a>
+		</div>
+		<div class="content">
+			<div class="list">
+				<volist name="fleamarket" id="item">
+					<a href="{:U('FleamarketDetail',array('fid'=>$item['fid'] ))}" class="item rentalitem ">
+						<img src="{$item.image}"/>
+						<div class="rentalinfo">
+							<p class="rentaltitle">{$item.fname}</p>
+							<p class="rentalprice">{$item.fprice}元</p>
+							<p class="rentaladress">卖家：{$item.cname}</p>
+							<p class="rentaladress">联系电话：{$item.ctel}</p>
+						</div>
+					</a>
+				</volist>
+			</div>
+		</div>
+	</body>
+</html>

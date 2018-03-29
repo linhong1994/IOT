@@ -1,0 +1,2 @@
+php lock.php
+pause

@@ -1,0 +1,166 @@
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/select2/select2.min.css">
+<include file="Public/adminheader" /> 
+
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>	
+        <li >物业费管理</li>
+        <li class="active">物业费金额查询</li>
+      </ol>
+    </section>
+    <section  class="content">
+		
+		<div class="row">
+	        <div class="col-md-3 col-sm-6 col-xs-12">
+	          <div class="info-box">
+	            <span class="info-box-icon bg-green"><i class="fa fa-calendar" style="padding-top: 20px;"></i></span>
+	
+	            <div class="info-box-content">
+	              <span class="info-box-text">物业费</span>
+	              <span class="info-box-number">{$villagefee}</span>
+	            </div>
+	            <!-- /.info-box-content -->
+	          </div>
+	          <!-- /.info-box -->
+	        </div>
+	        <div class="col-md-3 col-sm-6 col-xs-12">
+	        	<div style="margin-top: 50px;">
+	        		<button class="btn btn-default" data-toggle="modal" data-target="#myModal">提现</button>
+	        	</div>
+	        </div>
+	        <div class="col-md-6 col-sm-12 col-xs-12" style="line-height: 0.5em">
+	        	<p>提现规则：</p>
+				<p>◆ 同一个微信实名账户提现，单笔单日限额2W/2W</p>
+				<p>◆ 同一个微信非实名用户提现，单笔单日限额2000/2000</p>
+				<p>◆ 单笔最小金额为1元</p>
+				<p>◆ 每个微信用户每天最多可提现10次</p>
+				<p>◆ 给同一个用户提现时间间隔不得低于15秒</p>
+	        </div>
+     	 </div>
+		
+		<div class="row">
+	        <div class="col-xs-12">
+	          <div class="box">
+	            <div class="box-header">
+	              <h3 class="box-title">提现记录</h3>
+	 			
+	              
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body table-responsive no-padding">
+	
+	              <table class="table table-hover">
+	                <tr>
+	                  <th>提现金额</th>
+	                  <th>提现时间</th>  
+	                  <th>提现管理员</th> 
+	                  <th>提现微信</th> 
+	                  <th>剩余金额</th>  
+	                </tr>
+	                <volist name="listarray" id="data">
+						<tr>
+
+		                    <td style="vertical-align: middle;">{$data.money}</td>
+		                    <td style="vertical-align: middle;">{$data.datetime}</td>
+		                    <td>{$data.admininfo.name}({$data.admininfo.phone})</td>
+		                    <td>{$data.name}</td>
+		                    <td style="vertical-align: middle;">{$data.surplus}</td>
+		                </tr>
+					</volist>
+	
+	              </table>
+	            </div>
+	            <div class="box-footer clearfix">
+	              <ul class="pagination pagination-sm no-margin pull-right">
+	                {$page}
+	              </ul>
+	            </div>
+	             
+	            <!-- /.box-body -->
+	          </div>
+	          <!-- /.box -->
+	        </div>
+	    </div>
+	    
+	    
+	    
+	    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">提现</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<empty name="wx">
+		      			请先设置管理员微信！
+		      			<form action="{:U('userLists')}" method="post"><br />
+		      				<input type="submit" id="" name="" value="前往设置" class="btn btn-primary"/>
+				        </form>
+		      			<else /> 
+		      			<form action="{:U('villagefeewithdrawals')}" method="post">
+				            <div class="form-group">
+				                <label class="col-sm-2 control-label">提现微信</label> 
+				           		<div class="col-sm-4">
+					                <select name="openid" class="form-control">
+					                	<foreach name="wx" item="wxvo" >  
+					                		  <option value="{$wxvo.openid}">{$wxvo.name}</option>
+										</foreach>
+	                                </select>
+				                </div>
+				                <label class="col-sm-2 control-label">提现金额</label>
+				           		<div class="col-sm-4">
+					                <input type="number" min="0" max="{$villagefee}" class="form-control" name="fee" placeholder="请输入提现金额" required="required"/>
+				                </div>
+				            </div>
+				            <div class="box-footer" style="padding-top: 50px;">
+				            	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				                <button type="submit"  class="btn btn-primary pull-right">添加</button>
+				            </div>
+				        </form>
+		      		</empty> 
+					
+		              <!-- /.form-group -->
+		      </div>
+		    </div>
+		  </div>
+		</div>
+      	<script>
+      		function insertfee(building,unit,room,date1){
+      			var iNumber = Number(prompt("请输入物业费"));
+      			if(iNumber==null||iNumber==""){
+      				return;
+      			}
+				if(isNaN(iNumber))  //判断输入的是否是数字
+					alert("请确认你的输入正确");
+				else if(iNumber < 0)  //判断输入的数字范围
+				 	alert("你输入的数小于0");
+				else if(iNumber==0)
+					alert("你输入的数等于0");
+				else{
+					if(confirm("录入后将不可修改，是否确定录入"))
+					{
+						$.post('{:U("villagefeeinsert")}',{building:building,unit:unit,room:room,feedate:date1,fee:iNumber},function(data){
+	      					if(data.result=="success"){
+	      						alert('录入成功');
+	      						window.location.reload("{:U('villagefeelist')}");
+	      					}
+	      					else{
+	      						alert(data.result);
+	      					}
+	      				});
+      				}
+				}
+      		}
+      		
+      	</script>
+        
+    </section>
+
+
+
+<include file="Public/adminfooter" />

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div class="bar bar-header bar-light">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">我的房屋</h1>
+			<a href="{:addons_url('Village://Index/RentalAdd')}" class="button button-clear button-positive"><i class="ionic ion-plus-round"></i> 发布</a>
+		</div>
+		<div class="content">
+			<div class="list">
+				<volist name="rental" id="item">
+					<a href="{:U('RentalDetail',array('rid'=>$item['rid'] ))}" class="item rentalitem">
+					
+						<img src="{$item.image}" />
+						<div class="rentalinfo">
+							<p class="rentaltitle">{$item.rtitle}</p>
+							<p class="rentalprice">{$item.rprice}元/月<span>{$item.rroom}-{$item.rarea}㎡</span></p>
+							<p class="rentaladress">{$item.radress}</p>
+							<!--<div class="rantalcondition">
+								<span class="conditionitem">押一付一</span>
+								<span class="conditionitem">押一付一</span>
+								<span class="conditionitem">押一付一</span>
+							</div>-->
+						</div>
+					</a>
+				</volist>
+				<!--<a href="RentalDetail.html" class="item rentalitem">
+					<img src="img/04.jpg" />
+					<div class="rentalinfo">
+						<p class="rentaltitle">asdasdasdasdassssssssssssssss</p>
+						<p class="rentalprice">700元/月<span>1室-1厅-40㎡</span></p>
+						<p class="rentaladress">丰泽区万达广场 万达公馆11栋  11楼 1103室</p>
+						<div class="rantalcondition">
+							<span class="conditionitem">押一付一</span>
+							<span class="conditionitem">押一付一</span>
+							<span class="conditionitem">押一付一</span>
+						</div>
+					</div>
+				</a>-->
+			</div>
+		</div>
+	</body>
+</html>

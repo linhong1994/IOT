@@ -1,0 +1,21 @@
+[ 2017-01-05T09:52:30+08:00 ] 127.0.0.1 /
+NOTIC: [8] Use of undefined constant ADDON_PUBLIC_PATH - assumed 'ADDON_PUBLIC_PATH' E:\ÍøÕ¾\weiphp\Application\Home\Conf\config.php ç¬¬ 65 è¡Œ.
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+ERR: SQLSTATE[HY000] [2002] ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+
+
+[ 2017-01-05T09:52:41+08:00 ] 127.0.0.1 /
+NOTIC: [8] Use of undefined constant ADDON_PUBLIC_PATH - assumed 'ADDON_PUBLIC_PATH' E:\ÍøÕ¾\weiphp\Application\Home\Conf\config.php ç¬¬ 65 è¡Œ.
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+ERR: SQLSTATE[HY000] [2002] ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+
+
+[ 2017-01-05T09:52:52+08:00 ] 127.0.0.1 /
+NOTIC: [8] Use of undefined constant ADDON_PUBLIC_PATH - assumed 'ADDON_PUBLIC_PATH' E:\ÍøÕ¾\weiphp\Application\Home\Conf\config.php ç¬¬ 65 è¡Œ.
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+ERR: SQLSTATE[HY000] [2002] ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+
+

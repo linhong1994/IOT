@@ -1,0 +1,92 @@
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/select2/select2.min.css">
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/iCheck/all.css">
+<include file="Public/adminheader" /> 
+
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">活动管理</a></li>
+        <li class="active">活动详情</li>
+      </ol>
+    </section>
+    <section  class="content invoice">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-bookmark-o"></i>活动名称： {$activity.title}
+            <small class="pull-right">发布时间：{$activity.addtime}</small>
+          </h2>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- info row -->
+      <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+                         
+          <address>
+            <strong>活动小区</strong><br>
+            <volist name="village" id="vo">
+			{$vo.name}<br/>
+			</volist>
+            <br>
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          
+          <address>
+            <strong>活动信息</strong><br>
+            {$activity.startTime}<br>
+           		 至<br>
+            {$activity.stopTime}<br>
+       		活动人数: {$activity.number}
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          <b>报名截止时间</b><br>
+          <br>
+          <b>{$activity.registerTime}</b> <br>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-xs-12 table-responsive">
+          
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-xs-6">
+          <p class="lead">活动描述:</p>
+          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+           {$activity.describe}
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-6">
+          <p class="lead">活动图片</p>
+
+          <img src="{$activity.banner}" style="width: 100%;"/>
+        </div>
+        <!-- /.col -->
+      </div>
+
+      
+        
+    </section>
+
+
+
+<include file="Public/adminfooter" />
+

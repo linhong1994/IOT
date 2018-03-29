@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="{:ADDON_PUBLIC}/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+
+		<style type="text/css">
+			.weui_btn_primary{
+				background: #e42012;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">开通/续费</h1>
+		</div>
+		<div class="content">
+						<!--
+            	作者：15305031018@163.com
+            	时间：2016-05-04
+            	描述：轮播
+            -->
+			<div class="swiper-container swiper-container1" style="position: relative;">
+			  <div class="swiper-wrapper">
+					<foreach name="adlist" item="data" >
+					    <div class="swiper-slide">
+					    	<a href="{:addons_url('Village://Index/advertisementDetail',array('adid'=>$data['id']))}">
+					    		<img class="lunboimg"  src="{$data.adimage}"/>
+					    	</a>
+					    </div>
+					</foreach>
+			  </div>
+			   <div class="swiper-pagination pager1" ></div>
+			</div>
+
+
+
+		<br>
+
+
+
+
+		<volist name="paylist" id="vo">
+		<button class="weui_btn weui_btn_primary"  value="{$vo.id}" data-id="{$vo.id}" style="font-size:20px;width: 70%;position: relative;" onclick="jsApiCall(this.value)">{$vo.name} ￥{$vo.price}</button>
+		<!--	<p style="text-align: center;"><form   >
+				<input type="hidden" name="lockid" value="{$vo.id}" />
+				<input  class="weui_btn weui_btn_primary" type="submit" value="{$vo.door}" style="font-size:20px;width: 50%;"/>
+			</form></p>-->
+		</volist>
+
+			
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				
+				wx.config({
+				    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				    appId: "{$appId}", // 必填，公众号的唯一标识
+				    timestamp: {$timestamp}, // 必填，生成签名的时间戳
+				    nonceStr: "{$nonceStr}", // 必填，生成签名的随机串
+				    signature: "{$signature}",// 必填，签名，见附录1
+				    jsApiList: ['chooseWXPay','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				});
+
+
+			});
+
+			//调用微信JS api 支付
+			function jsApiCall(id)
+			{
+				var obj = {$jsApiParameters};
+				var jsApiParameters = obj[id][0];
+				//document.write(jsApiParameters);
+				WeixinJSBridge.invoke(
+					'getBrandWCPayRequest',
+					jsApiParameters,
+					function(res){
+						WeixinJSBridge.log(res.err_msg);
+						//if(res.err_msg=="get_brand_wcpay_request:ok"){//付费的注释掉
+						var msg=layer.msg('缴费信息正在更新，请勿关闭！', {icon: 16,time:99999999});
+						$.ajax({
+							type:"post",
+							data:{data:id},
+							url:"{:addons_url('Village://Ks/updatapay')}",
+							async:true,
+							success:function(data){
+								layer.close(msg);
+								if(data=="success"){
+									layer.msg('信息已更新！');
+								}else{
+									layer.msg('更新失败，请联系客服！', {time:5000});
+								}
+								location.href="{:addons_url('Village://Ks/index')}" ;
+							},
+							error:function(data){
+								layer.msg('更新失败，请联系客服！', {time:5000});
+								location.href="{:addons_url('Village://Ks/index')}" ;
+							}
+						});
+//							location.href="location: {addons_url('Village://Index/updatafee')}" ;
+						//}
+					}
+				);
+			};
+		var mySwiper1 = new Swiper('.swiper-container1', {
+				pagination : '.pager1',
+				paginationClickable :true,
+				autoplay: 5000,//可选选项，自动滑动
+				loop : true,
+			});
+		</script>
+
+	</body>
+</html>

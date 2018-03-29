@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/zsshstyle.css"/>
+		<script type="text/javascript" src="js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="js/swiper.min.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=cc1c2ac35d51aa44133e404c95100e54&plugin=AMap.PlaceSearch"></script>
+	</head>
+	<body>
+		<style>
+	       #container {
+				position: absolute;
+				top: 50px;
+				left: 0;
+				right: 0;
+				bottom: 0px;
+				width: 100%;
+				height: 100%;
+			}
+			.content{
+				position:inherit;
+			}
+	    </style>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">生活导航</h1>
+		</div>
+		<div class="content">
+			<div class="list">
+				<label class="item item-input item-select">
+					<div class="input-label"> 服务类别</div>
+					<select onchange="selectchange(this.value)">
+						<!--汽车服务|汽车销售|汽车维修|摩托车服务|餐饮服务|购物服务|生活服务|体育休闲服务|
+							医疗保健服务|住宿服务|风景名胜|商务住宅|政府机构及社会团体|科教文化服务|交通设施服务|
+							金融保险服务|公司企业|道路附属设施|地名地址信息|公共设施
+                        -->
+                        <option value="餐饮服务" selected>餐饮服务</option>
+						<option value="购物服务">购物服务</option>
+						<option value="生活服务">生活服务</option>
+						<option value="体育休闲服务">体育休闲服务</option>
+						<option value="医疗保健服务">医疗保健服务</option>
+						<option value="住宿服务">住宿服务</option>
+						<option value="风景名胜">风景名胜</option>
+						<option value="商务住宅">商务住宅</option>
+						<option value="政府机构及社会团体">政府机构及社会团体</option>
+						<option value="科教文化服务">科教文化服务</option>
+						<option value="交通设施服务">交通设施服务</option>
+						<option value="金融保险服务">金融保险服务</option>
+						<option value="公司企业">公司企业</option>
+						<option value="道路附属设施">道路附属设施</option>
+						<option value="地名地址信息">地名地址信息</option>
+						<option value="公共设施">公共设施</option>
+						<option value="摩托车服务">摩托车服务</option>
+						<option value="汽车服务">汽车服务</option>
+						<option value="汽车销售">汽车销售</option>
+						<option value="汽车维修">汽车维修</option>
+					</select>
+				</label>
+			</div>
+			<div  id='container'></div>
+			<div id="tip"></div>
+			<div id="panel" style="display: none;"></div>
+		</div>
+		<script>
+		    var map = new AMap.Map("container", {
+		        resizeEnable: true
+		    });
+		    var placeSearch = new AMap.PlaceSearch({ //构造地点查询类
+			            pageSize: 20,
+			            type: '餐饮服务',
+			            pageIndex: 1,
+			            map: map,
+			            panel: "panel"
+			        });
+		    var cpoint = [118.608532,24.885366]; //中心点坐标
+			placeSearch.searchNearBy('', cpoint, 200, function(status, result) {});
+		    function selectchange(va){
+			        placeSearch.setType(va);
+			        placeSearch.searchNearBy('', cpoint, 200, function(status, result) {
+						console.log(result)
+			        });
+		    }
+		</script>
+	</body>
+</html>

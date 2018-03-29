@@ -1,0 +1,4 @@
+微信支付证书存放路径 \Addons\Wxpay\ThinkPHP\Library\Vendor\WXpay\cert
+
+
+微信支付参数设置 \ThinkPHP\Library\Vendor\Wxpay\lib\Config.php

@@ -1,0 +1,145 @@
+<include file="Public/adminheader" />
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+      </ol>
+    </section>
+    <section  class="content">
+      <!-- Info boxes -->
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">总用户数</span>
+              <span class="info-box-number">{$userCount}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">今日新增</span>
+              <span class="info-box-number">{$NewNumber}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">上次登录时间</span>
+              <span class="info-box-number">{$admin.lastlogindate}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">上次登录IP</span>
+              <span class="info-box-number">{$admin.loginIP}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <if condition="$admin['grade'] eq 0">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">待处理投诉</span>
+              <span class="info-box-number">{$complaint}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">待处理报修</span>
+              <span class="info-box-number">{$repair}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        </if>
+      </div>
+      
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">平台公告</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+	                <tr>
+	                  <th>公告编号</th>
+	                  <th>公告标题</th> 
+	                  <th>公告内容</th> 
+	                  <th>发布时间</th>            
+	                  <th>操作</th>
+	                </tr>
+	                <volist name="noticelist" id="data">
+						<tr>
+							<td style="vertical-align: middle;">{$data.id}</td>
+		                    <td style="vertical-align: middle;">{$data.ntitle}</td>
+		                    <td style="max-width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" title="{$data.nbody}">{$data.nbody}</td>
+		                    <td style="vertical-align: middle;">{$data.addtime}</td>
+		                    <td style="vertical-align: middle;"><a href="{:U('adnoticedetail',array('nid'=>$data['id']))}">查看</a></td>
+		                </tr>
+					</volist>
+	
+	              </table>
+          </div>
+          <!-- /.table-responsive -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix">
+          <a href="{$noticeurl}" class="btn btn-sm btn-info btn-flat pull-right">更多...</a>
+        </div>
+        <!-- /.box-footer -->
+      </div>
+
+	    	
+    </section>
+
+
+<include file="Public/adminfooter" />

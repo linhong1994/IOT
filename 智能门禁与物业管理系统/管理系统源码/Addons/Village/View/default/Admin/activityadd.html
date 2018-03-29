@@ -1,0 +1,146 @@
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/select2/select2.min.css">
+<link rel="stylesheet" href="{:ADDON_PUBLIC}/plugins/iCheck/all.css">
+<include file="Public/adminheader" /> 
+
+    <section class="content-header">
+      <h1>
+      	物业管理系统
+        <small> Q小区 Version 0.1</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">活动管理</a></li>
+        <li class="active">活动发布</li>
+      </ol>
+    </section>
+    <section  class="content">
+		<div class="row">
+
+        <!-- /.col (left) -->
+	        <div class="col-md-8">
+		        <form class="form-horizontal" action="{:U('activityadd')}" method="post" enctype="multipart/form-data">
+			        <div class="box box-primary">
+			            <div class="box-header">
+			              <h3 class="box-title">活动发布</h3>
+			            </div>
+			            <div class="box-body">
+			            	
+		            		<div class="form-group">
+			               		<label class="col-sm-3 control-label">活动名称</label>
+			               		<div class="col-sm-5">
+					                <input type="text" name="title" class="form-control pull-right" required="required">
+								</div>
+			             	</div>
+			             	<div class="form-group">
+			               		<label class="col-sm-3 control-label">活动小区</label>
+			               		<div class="col-sm-5">
+
+					                <select name="villageid[]" class="form-control select2" multiple="multiple" data-placeholder="选择小区（多选）" required="required" style="">
+					                  	<volist name="villagelist" id="item">
+											<option value="{$item.id}">{$item.name}</option>
+										</volist>
+					                </select>					           
+								</div>
+			             	</div>
+			             	<div class="form-group">
+			               		<label class="col-sm-3 control-label">联系方式</label>
+			               		<div class="col-sm-5">
+					                <input type="text" name="tel" class="form-control pull-right" required="required">
+								</div>
+			             	</div>
+			             	<div class="form-group">
+			               		<label class="col-sm-3 control-label">活动图片</label>
+			               		<div class="col-sm-5">
+					                <input type="file" name="activityimage" accept="image/*" required="required" >
+								</div>
+			             	</div>
+			             	<div class="form-group">
+			               		<label class="col-sm-3 control-label">参与人数</label>
+			               		<div class="col-sm-5">
+					                <input type="text" name="number" class="form-control pull-right" required="required">
+								</div>
+			             	</div>
+			             	<div class="form-group">
+			               		<label class="col-sm-3 control-label">活动类型</label>
+			               		<div class="col-sm-5">
+					                <div class="input-group">
+					                    <label>
+						                  <input type="radio" name="type" value="1" class="minimal" checked>普通活动
+						                </label>
+						                <label style="margin-left: 20px;">
+						                  <input type="radio" name="type" value="2" class="minimal">火热报名
+						                </label>
+					                </div>
+								</div>
+			             	</div>
+			              	<div class="form-group">
+			               		<label class="col-sm-3 control-label">活动时间</label>
+			               		<div class="col-sm-5">
+					                <input type="text" name="activitytime" class="form-control pull-right" id="reservationtime" required="required">
+								</div>
+			             	</div>
+			             	<div class="form-group">
+			               		<label class="col-sm-3 control-label">报名截止时间</label>
+			               		<div class="col-sm-5">
+					                <input type="text" name="registerTime" class="form-control pull-right" id="registerTime" required="required">
+								</div>
+			             	</div>
+			             	<div class="form-group">
+			               		<label class="col-sm-3 control-label">描述</label>
+			               		<div class="col-sm-9">
+					                <textarea id="editor1" name="describe" rows="10" cols="80" placeholder="描述活动信息"></textarea>
+								</div>
+			             	</div>
+
+						 
+		           		 </div>
+			            <div class="box-footer">
+			            	<p style="text-align: center;"> <button type="submit" class="btn btn-info">发布</button></p>
+				           
+				        </div>
+		         	</div>
+	          	</form>
+	
+	        </div>
+      </div>
+		
+      
+        
+    </section>
+
+
+
+<include file="Public/adminfooter" />
+<script src="{:ADDON_PUBLIC}/plugins/select2/select2.full.min.js"></script>
+<script src="{:ADDON_PUBLIC}/plugins/iCheck/icheck.min.js"></script>
+<script src="{:ADDON_PUBLIC}/plugins/ckeditor/ckeditor.js"></script>
+<script>
+	window.onload=function(){
+		$('#reservationtime').daterangepicker({
+	 
+			timePicker: true,
+    		timePicker12Hour: false,
+		 	timePickerIncrement: 10, 
+		 	separator:'/',
+		 	format: 'YYYY-MM-DD H:mm:ss ',
+		});
+		$('#registerTime').daterangepicker({
+	 		singleDatePicker: true,
+			timePicker: true,
+    		timePicker12Hour: false,
+		 	timePickerIncrement: 10,
+		 	separator:'/',
+		 	format: 'YYYY-MM-DD H:mm:ss ',
+		});
+		$.fn.modal.Constructor.prototype.enforceFocus = function () { };
+		$(".select2").select2();
+		$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+	      checkboxClass: 'icheckbox_minimal-blue',
+	      radioClass: 'iradio_minimal-blue'
+	    });
+	    CKEDITOR.replace('editor1');
+
+	}
+</script>
+
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">跳蚤市场</h1>
+			<a href="{:U('FleamarketAdd')}" class="button button-clear button-positive"><i class="ionic ion-plus-round"></i> 发布</a>
+		</div>
+		<style>
+			.col-xs-6{
+				padding: 3px;
+			}
+			.fleamarketitem{
+				border: 1px solid #eee;
+				padding: 2px;
+			}
+			.fleamarketitem .rentalinfo{
+				/*position: absolute;*/
+				/*left: 110px;*/
+				/*top: 10px;*/
+				line-height: 15px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			.fleamarketitem .rentalinfo p{
+				padding: 0;
+				margin: 0;
+				line-height: 1.5em;
+				width: 100%;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			.rentalimg{
+				overflow: hidden;
+				width: 100%;
+				height: 150px;
+				/*text-overflow: ellipsis;*/
+				/*white-space: nowrap;*/
+			}
+		</style>
+		<div class="content">
+			<div class="row">
+				<volist name="fleamarket" id="item">
+					<div class="col-xs-6">
+						<div class="fleamarketitem">
+							<a href="{:U('FleamarketDetail',array('fid'=>$item['fid'] ))}" class="">
+								<div class="rentalimg">
+									<img style="width: 100%;" src="{$item.image}"/>
+								</div>
+								<div class="rentalinfo"><strong>
+									<p class="rentaltitle">{$item.fname}</p>
+									<p class="rentalprice" style="color: red;">¥{$item.fprice}元</p>
+									<!--<p class="rentaladress">卖家：{$item.cname}123123123123</p>-->
+								</strong></div>
+							</a>
+						</div>
+					</div>
+				</volist>
+			</div>
+		</div>
+	</body>
+</html>

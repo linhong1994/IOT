@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/ionic.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/swiper.min.css"/>
+		<link rel="stylesheet" href="{:ADDON_PUBLIC}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/webuploader.css"/>
+		<link rel="stylesheet" type="text/css" href="{:ADDON_PUBLIC}/css/zsshstyle.css"/>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="{:ADDON_PUBLIC}/js/bootstrap.min.js" ></script>
+		<script src="{:ADDON_PUBLIC}/js/webuploader.js"></script>
+	</head>
+	<body>
+		<style>
+			.webuploader-pick{
+				background: none;
+				width: 100px;
+				height: 100px;
+			}
+			body,html{overflow: auto;}
+		</style>
+		<div class="bar bar-header bar-assertive">
+			<i class="ionic ion-ios-arrow-back backion" onclick="window.history.back(-1)"></i>
+			<h1 class="title">填写房屋信息</h1>
+		</div>
+		<div class="content">
+			<form action="{:U('RentalAdd')}" method="post" id="form">
+				<div class="list">
+					<label class="item item-input">
+						<span class="input-label">小区</span>
+						<input type="text" name="villagename" placeholder="小区" />
+						
+					</label>
+					<label class="item item-input">
+						<span class="input-label">标题</span>
+						<input type="text" name="rentaltitle" placeholder="标题" />
+						
+					</label>
+					<label class="item item-input">
+						<span class="input-label">租金</span>
+						<input type="text" name="rentalprice" placeholder="租金"/>
+						
+					</label>
+					<label class="item item-input">
+						<span class="input-label">地址</span>
+						<input type="text" name="rentaladress" placeholder="地址" />
+						
+					</label>
+					<label class="item item-input">
+						<span class="input-label">户型</span>
+						<input type="text" name="rentalroom" placeholder="户型"/>
+						
+					</label>
+					<label class="item item-input">
+						<span class="input-label">面积</span>
+						<input type="text" name="rentalarea" placeholder="面积"/>
+						
+					</label>
+					<label class="item item-input">
+						<span class="input-label">联系人</span>
+						<input type="text" name="rentalname" placeholder="联系人"/>
+						
+					</label>
+					<label class="item item-input">
+						<span class="input-label">联系电话</span>
+						<input type="text" name="rentalphone" placeholder="手机号码"/>
+					</label>
+					
+					<label class="item item-divider">房屋描述</label>
+					<textarea name="rentaldescribe" style="width: 96%;border: 1px solid black;height: 150px;margin: 2px 2%;" placeholder="描述房屋信息"></textarea>
+					
+					
+					<label class="item item-divider">配置</label>
+					<div class="row" style="padding: 10px;">
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="chuang" type="checkbox" value="rentalequipment"/>床
+						</div>
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="kuandai" type="checkbox" value="rentalequipment" />宽带
+						</div>
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="jiaju" type="checkbox" value="rentalequipment" />家具
+						</div>
+						<div class="col-xs-4 rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="nuanqi" type="checkbox" value="rentalequipment" />暖气
+						</div>
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="meiqi" type="checkbox" value="rentalequipment" />煤气
+						</div>
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="youxiandianshi" type="checkbox" value="rentalequipment" />有线电视
+						</div>
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="dianshi" type="checkbox" value="rentalequipment" />电视
+						</div>
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="bingxiang" type="checkbox" value="rentalequipment" />冰箱
+						</div>
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="kongtiao" type="checkbox" value="rentalequipment" />空调
+						</div>
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="reshuiqi" type="checkbox" value="rentalequipment" />热水器
+						</div>
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="xiyiji" type="checkbox" value="rentalequipment" />洗衣机
+						</div>
+						<div class="col-xs-4  rentalcheck">
+							<i class="ionic ion-checkmark"></i>
+							<input name="weibolu" type="checkbox" value="rentalequipment" />微波炉
+						</div>
+						
+					</div>
+					<label class="item item-divider">照片</label>
+					<div style="display: none;" id="imagesinput"></div>
+				</div>	
+			</form>
+			<div id="uploader" class="wu-example">
+			    <!--用来存放文件信息-->
+			    
+			    
+			   
+			  <div id="thelist" class="uploader-list" style="">
+			  	
+			  </div>
+			  <div class="picker"  id="picker"></div>
+			</div>
+			<button type="button" id="submit" class="weui_btn weui_btn_primary" style="margin-top:10px;margin-bottom: 100px;margin-left: 25%;width: 50%;">发布</button>
+			
+			
+			<div id="toast" style="display: none;">
+			    <div class="weui_mask_transparent"></div>
+			    <div class="weui_toast">
+			        <i class="weui_icon_safe weui_icon_safe_warn"></i>
+			        <p class="weui_toast_content" id="toastcontent">已完成</p>
+			    </div>
+			</div>
+			
+			<div id="wxconfirm" class="weui_dialog_confirm" style="display: none;">
+			    <div class="weui_mask" style="z-index: 999;"></div>
+			    <div class="weui_dialog" style="z-index: 1000;">
+			        <div class="weui_dialog_hd"><strong class="weui_dialog_title">提醒</strong></div>
+			        <div class="weui_dialog_bd">确认删除该图片吗?</div>
+			        <div class="weui_dialog_ft">
+			            <a href="javascript:void(0)" id="cancel" class="weui_btn_dialog default">取消</a>
+			            <a href="javascript:void(0)" id="sure" class="weui_btn_dialog primary">确定</a>
+			        </div>
+			    </div>
+			</div>
+			<div id="loadingToast" class="weui_loading_toast" style="display:none;">
+			    <div class="weui_mask_transparent"></div>
+			    <div class="weui_toast">
+			        <div class="weui_loading">
+			            <!-- :) -->
+			            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+			            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+			        </div>
+			        <p class="weui_toast_content">图片上传中</p>
+			    </div>
+			</div>
+		</div>
+		<script>
+			$(function(){
+				$(".rentalcheck").on('click',function(){
+				 	var inp=$(this).find('input');
+				 	var i=$(this).find('i');
+				 	if(inp.attr('checked')=="checked"){
+				 		inp.removeAttr('checked')
+				 		$(this).removeClass('checkactive');
+				 	}
+				 	else{
+				 		inp.attr('checked',true)
+				 		$(this).addClass("checkactive");
+				 	}
+				})
+			})
+			var $list=$("#thelist");
+		    var filecount=0;
+		    var uploadcount=0;
+		    var CompleteCount=0;
+			var uploader = WebUploader.create({
+
+			    // swf文件路径
+			    swf:  '/js/Uploader.swf',
+			
+			    // 文件接收服务端。
+			    server: "{:addons_url('Village://Api/uploadimages')}",
+			
+			    // 选择文件的按钮。可选。
+			    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+			    fileNumLimit :8,
+			    pick:{
+			    	id:'#picker',
+			    	multiple:true,
+			    },
+			
+			    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+			    resize: false,
+			    accept: {
+			        title: 'Images',
+			        extensions: 'gif,jpg,jpeg,bmp,png',
+			        mimeTypes: 'image/*'
+			    }
+			});
+			
+			
+			uploader.on('uploadStart',function(file){
+				uploader.options.formData.imageid=file.id;
+			});
+			
+			uploader.on( 'fileQueued', function( file ) {
+				filecount++;
+			    var $li = $('<span id="'+file.id+'"><img></span>');
+			    var $img=$li.find('img');
+			    // $list为容器jQuery实例
+			    $list.append( $li );
+			    console.log();
+			    // 创建缩略图
+			    // 如果为非图片文件，可以不用调用此方法。
+			    // thumbnailWidth x thumbnailHeight 为 100 x 100
+			    uploader.makeThumb( file, function( error, src ) {
+			        if ( error ) {
+			            $img.replaceWith('<span>不能预览</span>');
+			            return;
+			        }
+			
+			        $img.attr( 'src', src );
+			    }, 100, 100 );
+			    $img.on('click',function(){
+			    	$("#wxconfirm").css("display","block");
+			    	
+			    	$("#cancel").on('click',function(){
+			    		
+			    		$("#wxconfirm").css("display","none");
+			    	});
+			    	$("#sure").on('click',function(){
+			    		uploader.removeFile(file,true);	
+			    		$("#wxconfirm").css("display","none");
+			    	});
+			    })
+			});
+		
+			//监听图片从列队移除事件
+			uploader.on("fileDequeued",function(file){
+				filecount--;
+				$("#"+file.id).remove();
+			});
+			$("#submit").click(function(){
+				var rentaltitle=$("input[name='rentaltitle']")[0].value;
+				var rentalprice=$("input[name='rentalprice']")[0].value;
+				var rentaldes=$("input[name='rentaldes']")[0].value;
+				var rentaladress=$("input[name='rentaladress']")[0].value;
+				var rentalroom=$("input[name='rentalroom']")[0].value;
+				var rentalarea=$("input[name='rentalarea']")[0].value;
+				var rentalname=$("input[name='rentalname']")[0].value;
+				var rentalphone=$("input[name='rentalphone']")[0].value;
+				//alert(fkname+price+des+name+phone);
+				if(rentaltitle==""){
+					toastshow("标题不能为空!");
+					return;
+				}
+				if(rentalprice==""){
+					toastshow("价格不能为空!");
+					return;
+				}
+				if(rentaldes==""){
+					toastshow("描述不能为空!");
+					return;
+				}
+				if(rentaladress==""){
+					toastshow("地址不能为空!");
+					return;
+				}
+				if(rentalroom==""){
+					toastshow("户型不能为空!");
+					return;
+				}
+				if(rentalarea==""){
+					toastshow("面积不能为空!");
+					return;
+				}
+				if(rentalname==""){
+					toastshow("联系人不能为空!");
+					return;
+				}
+				if(rentalphone==""){
+					toastshow("手机号码不能为空!");
+					return;
+				}
+				if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(rentalphone))||rentalphone.length!=11){
+					toastshow("手机格式错误!");
+					return;
+				}
+				if(filecount>0){
+					$("#loadingToast").css("display","block");
+					uploader.upload();
+				}else{
+					//alert("111");
+					$("#form").submit();
+				}
+			});
+				
+	
+			
+			uploader.on( 'uploadSuccess', function( file,data) {
+				if(data.status=="success"){
+					$("#imagesinput").append("<input name='imagesarr["+uploadcount+"]' value='"+data.savename+"' />");
+				}
+				uploadcount++;
+			});
+			uploader.on( 'uploadComplete', function( file) {
+			    CompleteCount++;
+			    if(CompleteCount==filecount){
+			    	$("#loadingToast").css("display","none");
+					$("#form").submit();
+			    }
+			});
+			function toastshow(msg){
+				$("#toastcontent").html(msg);
+					$("#toast").css('display','block');
+					setTimeout(function(){
+						$("#toast").css('display','none');
+					},1000);
+			}
+		</script>
+	</body>
+</html>

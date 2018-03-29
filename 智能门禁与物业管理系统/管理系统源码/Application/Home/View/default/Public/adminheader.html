@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Q小区 | 首页</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <include file="Public/adminheadercss" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]--></head>
+  
+  <body class="hold-transition skin-blue sidebar-mini" style="padding: 0">
+    <div class="wrapper">
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="index2.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini">
+            <b>A</b>LT</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg">
+            Q小区</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span></a>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <li class="dropdown user user-menu">
+                <p style="color: white;padding-top: 15px;padding-right: 15px;">欢迎
+                  <if condition="$admin['grade'] eq 0">物业：
+                    <else/>管理员:</if>{$admin.name}</p></li>
+              <li class="dropdown user user-menu">
+                <a href="{:addons_url('Village://Logon/logout')}">安全退出</a></li>
+              <!-- Control Sidebar Toggle Button --></ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <if condition="$admin['grade'] eq 1">
+              <li class="header">平台管理员功能</li>
+              <li class="treeview {$indexac}">
+                <a href="{:U('index')}">
+                  <i class="fa fa-dashboard"></i>
+                  <span>首页</span>
+                  <i class="label pull-right bg-red"></i>
+                </a>
+              </li>
+              <li class="treeview {$vilagemanac}">
+                <a href="#">
+                  <i class="fa fa-dashboard"></i>
+                  <span>小区管理</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="{$vilageaddac}">
+                    <a href="{:U('addVillage')}">
+                      <i class="fa fa-circle-o"></i>小区添加</a>
+                  </li>
+                  <li class="{$villagelistac}">
+                    <a href="{:U('villageLists')}">
+                      <i class="fa fa-circle-o"></i>小区列表</a>
+                  </li>
+                  <li class="{$villageadminmanac}">
+                    <a href="{:U('adminLists')}">
+                      <i class="fa fa-circle-o"></i>物业列表</a>
+                  </li>
+                  <li class="{$villagefeewithdrawalsrecordac}">
+                    <a href="{:U('admin_villagefeewithdrawalsrecord')}">
+                      <i class="fa fa-circle-o"></i>物业费提现记录</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="treeview {$userac}">
+                <a href="#">
+                  <i class="fa fa-dashboard"></i>
+                  <span>用户管理</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="{$userlistac}">
+                    <a href="{:U('userLists')}">
+                      <i class="fa fa-circle-o"></i>用户列表</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="treeview {$complaintlistac}">
+                <a href="{:U('locklist')}">
+                  <i class="fa fa-dashboard"></i>
+                  <span>门禁列表</span>
+                  <i class="label pull-right bg-red"></i>
+                </a>
+              </li>
+              <li class="treeview {$activityac}">
+                <a href="#">
+                  <i class="fa fa-dashboard"></i>
+                  <span>小区活动</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="{$activitylistac}">
+                    <a href="{:U('activitylist')}">
+                      <i class="fa fa-circle-o"></i>活动列表</a>
+                  </li>
+                  <li class="{$activityaddac}">
+                    <a href="{:U('activityadd')}">
+                      <i class="fa fa-circle-o"></i>活动发布</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="treeview {$advertisementac}">
+                <a href="#">
+                  <i class="fa fa-dashboard"></i>
+                  <span>平台广告</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="{$advertisementlistac}">
+                    <a href="{:U('advertisementlist')}">
+                      <i class="fa fa-circle-o"></i>广告列表</a>
+                  </li>
+                  <li class="{$advertisementaddac}">
+                    <a href="{:U('advertisementadd')}">
+                      <i class="fa fa-circle-o"></i>发布广告</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="treeview {$adminnoticelistac}">
+                <a href="{:U('adminnoticelist')}">
+                  <i class="fa fa-dashboard"></i>
+                  <span>平台公告</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+              </li>
+              <li class="treeview {$adminnoticelistac}">
+                <a href="{:U('adminpwd')}">
+                  <i class="fa fa-dashboard"></i>
+                  <span>修改密码</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+              </li>
+              <else/>
+              <li class="header">物业管理员功能</li>
+              <li class="treeview {$indexac}">
+                <a href="{:U('index')}">
+                  <i class="fa fa-dashboard"></i>
+                  <span>首页</span>
+                  <i class="label pull-right bg-red"></i>
+                </a>
+              </li>
+              <li class="treeview {$userac}">
+                <a href="#">
+                  <i class="fa fa-dashboard"></i>
+                  <span>用户管理</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="{$userlistac}">
+                    <a href="{:U('userLists')}">
+                      <i class="fa fa-circle-o"></i>用户列表</a>
+                  </li>
+                  <li class="{$userlistac}">
+                    <a href="{:U('propertyLists')}">
+                      <i class="fa fa-circle-o"></i>物业列表</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="treeview {$villagefeeac}">
+                <a href="#">
+                  <i class="fa fa-dashboard"></i>
+                  <span>物业费管理</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="{$villagefeelistac}">
+                    <a href="{:U('villagefeelist')}">
+                      <i class="fa fa-circle-o"></i>物业费录入</a>
+                  </li>
+                  <li class="{$villagefeesituationac}">
+                    <a href="{:U('villagefeesituation')}">
+                      <i class="fa fa-circle-o"></i>物业费缴费情况</a>
+                  </li>
+                  <li class="{$villagefeeselectac}">
+                    <a href="{:U('villagefeeselect')}">
+                      <i class="fa fa-circle-o"></i>物业费金额查询</a>
+                  </li>
+                  <li class="{$villagefeerecordac}">
+                    <a href="{:U('villagefeerecord')}">
+                      <i class="fa fa-circle-o"></i>物业费缴费记录</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="treeview {$complaintlistac}">
+                <a href="{:U('locklist')}">
+                  <i class="fa fa-dashboard"></i>
+                  <span>门禁列表</span>
+                  <i class="label pull-right bg-red"></i>
+                </a>
+              </li>
+              <li class="treeview {$repairlistac}">
+                <a href="{:U('repairlist')}">
+                  <i class="fa fa-dashboard"></i>
+                  <span>报修管理</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+              </li>
+              <li class="treeview {$xiaoxitongzhi}">
+                <a href="#">
+                  <i class="fa fa-dashboard"></i>
+                  <span>消息通知</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="{$villagenoticelistac}">
+                    <a href="{:U('villagenoticelist')}">
+                      <i class="fa fa-circle-o"></i>小区通知</a>
+                  </li>
+                  <li class="{$adnoticelistac}">
+                    <a href="{:U('adnoticelist')}">
+                      <i class="fa fa-circle-o"></i>平台通知</a>
+                  </li>
+                  <li class="{$guidelistac}">
+                    <a href="{:U('guidelist')}">
+                      <i class="fa fa-circle-o"></i>办事指南</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="treeview {$complaintlistac}">
+                <a href="{:U('complaintlist')}">
+                  <i class="fa fa-dashboard"></i>
+                  <span>投诉信息</span>
+                  <i class="label pull-right bg-red"></i>
+                </a>
+              </li>
+              <li class="treeview {$complaintlistac}">
+                <a href="{:U('roomlist')}">
+                  <i class="fa fa-dashboard"></i>
+                  <span>房间列表</span>
+                  <i class="label pull-right bg-red"></i>
+                </a>
+              </li>
+              <li class="treeview {$adminnoticelistac}">
+                <a href="{:U('adminpwd')}">
+                  <i class="fa fa-dashboard"></i>
+                  <span>修改密码</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                </a>
+              </li>
+            </if>
+          </ul>
+        </section>
+        <!-- /.sidebar --></aside>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
